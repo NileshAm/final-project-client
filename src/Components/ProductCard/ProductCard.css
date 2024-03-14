@@ -1,0 +1,23 @@
+.product-card{
+    transition: all 600ms;
+    cursor: pointer;
+}
+.product-card:hover{
+    scale: 1.05;
+}
+
+.img{
+    width: inherit;
+    border-radius: inherit;
+}
+
+.fs-8{
+    font-size: x-small;
+}
+.fs-7{
+    font-size: small;
+}
+
+.rating-width{
+    width: 60%;
+}

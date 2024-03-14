@@ -1,8 +1,15 @@
 import React from 'react'
+import ProductCard from '../../Components/ProductCard/ProductCard'
+
+import "bootstrap/dist/css/bootstrap.css"
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <>
+    <main className='container-fluid'>
+      <ProductCard/>
+    </main>
+    </>
   )
 }
 
