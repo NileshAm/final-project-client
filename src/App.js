@@ -18,9 +18,7 @@ function App() {
         <Route path="/admin/login" element={<h1>Admin login</h1>} />
         <Route path="/admin" element={<CheckAdminLogin />}>
           <Route index element={<h1>Admin home</h1>} />
-          <Route path="add" element={<h1>add</h1>} />
-          <Route path="update" element={<h1>update</h1>} />
-          <Route path="reserved" element={<h1>reservation state</h1>} />
+          <Route path="edit" element={<h1>edit</h1>} />
         </Route>
         <Route path="*" element={<h1>NotFound</h1>} />
       </Routes>
