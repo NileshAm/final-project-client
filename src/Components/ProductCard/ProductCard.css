@@ -1,5 +1,5 @@
 .product-card{
-    transition: all 600ms;
+    transition: all 400ms;
     cursor: pointer;
 }
 .product-card:hover{
@@ -9,6 +9,10 @@
 .img{
     width: inherit;
     border-radius: inherit;
+}
+
+.img-back{
+    aspect-ratio: 1;
 }
 
 .fs-8{
