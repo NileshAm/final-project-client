@@ -1,0 +1,10 @@
+.footer{
+    background-color: lightcoral;
+    height: 50vh;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.logos img{
+    display:inline-block;
+    margin: 5px;
+}
