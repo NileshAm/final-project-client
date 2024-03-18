@@ -37,7 +37,7 @@ const ProductCard = ({ data, admin }) => {
       <div className="row">
         <StarRating Rating={rating} starSize={15} className="rating-width" />
         {!admin && discount !== 0 && (
-          <div style={{ width: "47%", height: "80%" }}>
+          <div style={{ width: "47%", height: "80%", zIndex:"-1"  }}>
             <svg width={60} viewBox="0 0 252 96" fill="none">
               <ellipse
                 id="Ellipse 1"
@@ -54,7 +54,7 @@ const ProductCard = ({ data, admin }) => {
               />
             </svg>
             <p
-              style={{ position: "relative", bottom: "22px" }}
+              style={{ position: "relative", bottom: "22px"}}
               className="fs-7 fw-bolder text-light ps-2 m-0"
             >
               -{discount}%
@@ -72,7 +72,7 @@ const UserView = ({ data }) => {
   return (
     <div
       className="row"
-      style={discount !== 0 ? { position: "relative", top: "-15px" } : null}
+      style={discount !== 0 ? { position: "relative", top: "-15px", zIndex:"-1" } : null}
     >
       <div className="col-6 fw-bold text-success ">
         {numberWithCommas(discount ? (price * (100 - discount)) / 100 : price)}

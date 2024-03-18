@@ -1,0 +1,13 @@
+.login{
+    background-color: rgba(0, 0, 0, 0.225);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    backdrop-filter: blur(10px);
+}
+
+.logo{
+    width: 33.33%;
+    aspect-ratio: 2.64;
+}
