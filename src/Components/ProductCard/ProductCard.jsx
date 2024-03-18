@@ -19,24 +19,24 @@ const ProductCard = ({ data, admin }) => {
     return cls;
   };
 
-  let { discount, name, rating, img, url } = data;
+  let { Discount, Name, Rating, Image, ID } = data;
   const navigate = useNavigate();
   return (
     <div
       className={cls()}
       onClick={() => {
         if (!admin) {
-          navigate(`/product?id=${url}`);
+          navigate(`/product?id=${ID}`);
         }
       }}
     >
       <div className="border rounded w-100 img-back">
-        <img src={img} alt="Product" className="img" />
+        <img src={Image} alt="Product" className="img" />
       </div>
-      <div className="w-100 fs-5">{name}</div>
+      <div className="w-100 fs-5">{Name}</div>
       <div className="row">
-        <StarRating Rating={rating} starSize={15} className="rating-width" />
-        {!admin && discount !== 0 && (
+        <StarRating Rating={Rating} starSize={15} className="rating-width" />
+        {!admin && Discount !== 0 && (
           <div style={{ width: "47%", height: "80%", zIndex:"-1"  }}>
             <svg width={60} viewBox="0 0 252 96" fill="none">
               <ellipse
@@ -57,7 +57,7 @@ const ProductCard = ({ data, admin }) => {
               style={{ position: "relative", bottom: "22px"}}
               className="fs-7 fw-bolder text-light ps-2 m-0"
             >
-              -{discount}%
+              -{Discount}%
             </p>
           </div>
         )}
@@ -68,19 +68,19 @@ const ProductCard = ({ data, admin }) => {
 };
 
 const UserView = ({ data }) => {
-  let { price, discount } = data;
+  let { Price, Discount } = data;
   return (
     <div
       className="row"
-      style={discount !== 0 ? { position: "relative", top: "-15px", zIndex:"-1" } : null}
+      style={Discount !== 0 ? { position: "relative", top: "-15px", zIndex:"-1" } : null}
     >
       <div className="col-6 fw-bold text-success ">
-        {numberWithCommas(discount ? (price * (100 - discount)) / 100 : price)}
+        {numberWithCommas(Discount ? (Price * (100 - Discount)) / 100 : Price)}
       </div>
-      {discount !== 0 ? (
+      {Discount !== 0 ? (
         <div className="col">
           <div className="col-6 pt-1 fs-8 fw-bold text-danger ">
-            {numberWithCommas(discount && (price * discount) / 100)}
+            {numberWithCommas(Discount && (Price * Discount) / 100)}
           </div>
         </div>
       ) : null}
@@ -90,20 +90,20 @@ const UserView = ({ data }) => {
 
 const AdminView = ({ data }) => {
   const navigate = useNavigate();
-  let { url, status } = data;
+  let { ID, Status } = data;
   return (
     <div>
       <span
         className={
-          status === 1 ? "text-success fw-bolder " : "text-danger fw-bolder "
+          Status === 1 ? "text-success fw-bolder " : "text-danger fw-bolder "
         }
       >
-        Current state : {status === 1 ? "Active" : "Inactive"}
+        Current state : {Status === 1 ? "Active" : "Inactive"}
       </span>
       <button
         className="btn btn-success w-100 p-1 my-1"
         onClick={() => {
-          navigate(`/admin/edit?id=${url}`);
+          navigate(`/admin/edit?id=${ID}`);
         }}
       >
         Update Product
@@ -111,15 +111,19 @@ const AdminView = ({ data }) => {
       <button
         className="btn btn-warning w-100 p-1 my-1"
         onClick={() => {
+          // eslint-disable-next-line no-restricted-globals
+          if(!confirm("Are you sure?")){
+            return
+          }
           const form = new FormData();
-          form.append("id", url);
+          form.append("id", ID);
 
           console.log(form);
           axios
             .post(getServerURL("/admin/product/statechange"), form, {})
             .then((res) => {
               if (res.status === 200) {
-                alert("changed");
+                window.location.reload()
               } else {
                 alert("error occured");
               }
@@ -135,7 +139,7 @@ const AdminView = ({ data }) => {
         className="btn btn-danger w-100  p-1 my-1"
         onClick={() => {
           axios
-            .delete(getServerURL(`/admin/product/delete?id=${url}`))
+            .delete(getServerURL(`/admin/product/delete?id=${ID}`))
             .then((res) => {
               if (res.status === 200) {
                 alert("Deleted");
