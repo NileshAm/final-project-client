@@ -4,8 +4,10 @@ import "./Login.css";
 import Logo from "../../logo.svg";
 import axios from "axios";
 import getServerURL from "../../Utils/getServerURL";
+import { useNavigate } from "react-router";
 
 const Login = ({admin}) => {
+    const navigate = useNavigate()
   const submit = (event) => {
     event.preventDefault();
 
@@ -18,11 +20,10 @@ const Login = ({admin}) => {
     axios
       .post(getServerURL(url), form, {})
       .then((res) => {
-        return res.data;
+        if(res.data.redirect){
+            navigate(res.data.redirect)
+        }
       })
-      .then((data) => {
-        console.log(data);
-      });
   };
   return (
     <form
