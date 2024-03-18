@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage/HomePage";
 import About from "./Pages/About/About";
 import CheckAdminLogin from "./Components/CheckAdminLogin/CheckAdminLogin";
+import Login from "./Components/Login/Login";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/cart" element={<h1>cart</h1>} />                  
         <Route path="/search" element={<h1>search</h1>} />
         <Route path="/login" element={<h1>Login</h1>} />
-        <Route path="/admin/login" element={<h1>Admin login</h1>} />
+        <Route path="/admin/login" element={<Login admin/>} />
         <Route path="/admin" element={<CheckAdminLogin />}>
           <Route index element={<h1>Admin home</h1>} />
           <Route path="edit" element={<h1>edit</h1>} />
