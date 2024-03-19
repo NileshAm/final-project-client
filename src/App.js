@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage/HomePage";
 import About from "./Pages/About/About";
 import CheckAdminLogin from "./Components/CheckAdminLogin/CheckAdminLogin";
-import Login from "./Components/Login/Login";
+import AdminLogin from "./Pages/AdminLogin/AdminLogin";
 import SignUp from "./Pages/SignUp/SignUp";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Route path="/search" element={<h1>search</h1>} />
         <Route path="/login" element={<h1>Login</h1>} />
         <Route path="/signup" element={<SignUp/>} />
-        <Route path="/admin/login" element={<Login admin/>} />
+        <Route path="/admin/login" element={<AdminLogin/>} />
         <Route path="/admin" element={<CheckAdminLogin />}>
           <Route index element={<h1>Admin home</h1>} />
           <Route path="edit" element={<h1>edit</h1>} />
