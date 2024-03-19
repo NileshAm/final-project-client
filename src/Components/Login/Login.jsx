@@ -1,29 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./Login.css";
 import Logo from "../../logo.svg";
 import axios from "axios";
 import getServerURL from "../../Utils/getServerURL";
 import { useNavigate } from "react-router";
+import { FormGroup } from "../FormGroup/FormGroup";
 
-const Login = ({admin}) => {
-    const navigate = useNavigate()
+const Login = ({ admin }) => {
+  const navigate = useNavigate();
+
+  const [fieldError, setFieldError] = useState("");
+
   const submit = (event) => {
     event.preventDefault();
 
     const form = new FormData(event.target);
-    let url = "/login/user"
-    if(admin){
-        url = "/login/admin"
+    form.set("email", form.get("email").toLowerCase());
+    for (const key of form.keys()) {
+      if (form.get(key).trim() === "") {
+        setFieldError(key.charAt(0).toUpperCase() + key.slice(1) + " is empty");
+        return;
+      }
     }
 
-    axios
-      .post(getServerURL(url), form, {})
-      .then((res) => {
-        if(res.data.redirect){
-            navigate(res.data.redirect)
-        }
-      })
+    let url = "/login/user";
+    if (admin) {
+      url = "/login/admin";
+    }
+
+    axios.post(getServerURL(url), form, {}).then((res) => {
+      if (res.data.redirect) {
+        navigate(res.data.redirect);
+      }
+      console.log(res.data.Access);
+      if (res.data.Access === "Granted") {
+        alert("login");
+      } else {
+        alert("denied");
+      }
+    });
+  };
+  const textChange = () => {
+    setFieldError("");
   };
   return (
     <form
@@ -38,29 +57,36 @@ const Login = ({admin}) => {
           </div>
         </div>
 
-        <FormGroup label={"Username"} name={"username"} />
-        <FormGroup label={"Password"} name={"password"} />
-
+        <FormGroup
+          label={"Email"}
+          name={"email"}
+          className={"mt-3"}
+          type={"email"}
+          onChange={textChange}
+        />
+        <FormGroup
+          label={"Password"}
+          name={"password"}
+          className={"mt-3"}
+          type={"password"}
+          onChange={textChange}
+        />
+        {fieldError !== "" && (
+          <div className="bg-danger-subtle d-flex justify-content-center mt-3 rounded-3  p-1 text-danger">
+            {fieldError}
+          </div>
+        )}
         <button className="btn btn-outline-success mt-3" type="submit">
           Login
         </button>
+        <a
+          href={"/signup?returnurl=" + encodeURIComponent(window.location.href)}
+          className="pt-3 fs-7 d-flex justify-content-center"
+        >
+          Create an account
+        </a>
       </div>
     </form>
-  );
-};
-
-const FormGroup = ({ label, name }) => {
-  return (
-    <div className="form-group mt-3">
-      <label>{label}</label>
-      <input
-        type="text"
-        className="form-control"
-        placeholder={"Enter your " + label}
-        id={name}
-        name={name}
-      />
-    </div>
   );
 };
 
