@@ -30,9 +30,13 @@ const SignUp = () => {
     axios.post(getServerURL("/signup"), form, {}).then((res) => {
       if (res.data.signedUp) {
         alert("Succefully signed up");
-        window.location.href = new URLSearchParams(window.location.search).get(
+        let url = new URLSearchParams(window.location.search).get(
           "returnurl"
         );
+        if(!url){
+          url = "/"
+        }
+        window.location.href = url
       } else {
         setFieldError(res.data.message);
       }

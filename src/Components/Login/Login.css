@@ -7,6 +7,10 @@
     backdrop-filter: blur(10px);
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 .logo{
     width: 33.33%;
     aspect-ratio: 2.64;
