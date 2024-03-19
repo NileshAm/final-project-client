@@ -3,6 +3,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import About from "./Pages/About/About";
 import CheckAdminLogin from "./Components/CheckAdminLogin/CheckAdminLogin";
 import Login from "./Components/Login/Login";
+import SignUp from "./Pages/SignUp/SignUp";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/cart" element={<h1>cart</h1>} />                  
         <Route path="/search" element={<h1>search</h1>} />
         <Route path="/login" element={<h1>Login</h1>} />
+        <Route path="/signup" element={<SignUp/>} />
         <Route path="/admin/login" element={<Login admin/>} />
         <Route path="/admin" element={<CheckAdminLogin />}>
           <Route index element={<h1>Admin home</h1>} />
