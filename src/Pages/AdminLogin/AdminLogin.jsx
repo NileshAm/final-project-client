@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 
 import "./AdminLogin.css";
 import Logo from "../../logo.svg";
@@ -8,9 +8,20 @@ import { useNavigate } from "react-router";
 import { FormGroup } from "../../Components/FormGroup/FormGroup";
 
 const Login = () => {
+  axios.defaults.withCredentials = true;
   const navigate = useNavigate();
 
   const [fieldError, setFieldError] = useState("");
+
+  useLayoutEffect(() => {
+    axios.get(getServerURL("/login")).then((res) => {
+      console.log(res.data);
+      if (res.data.loggedIn) {
+        navigate("/admin");
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
 
   const submit = (event) => {
     event.preventDefault();
@@ -26,7 +37,11 @@ const Login = () => {
 
     axios.post(getServerURL("/login/admin"), form, {}).then((res) => {
       if (res.data.Access) {
-        navigate(res.data.redirect);
+        if (res.data.redirect) {
+          navigate(res.data.redirect);
+        } else {
+          setFieldError("Invalid username or password");
+        }
       } else {
         setFieldError("Invalid username or password");
       }
