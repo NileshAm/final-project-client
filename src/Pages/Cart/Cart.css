@@ -1,34 +1,34 @@
-.check-3{
-    width: 3%;
+.check-3 {
+  width: 3%;
 }
 
-.row{
-    --bs-gutter-x: 0px;
+.row {
+  --bs-gutter-x: 0px;
 }
 
-.fs-8{
-    font-size: small;
+.fs-8 {
+  font-size: small;
 }
-.fs-xs{
-    font-size: x-small;
-}
-
-.quantity-input{
-    flex: none !important;
-    width: 20% !important;
+.fs-xs {
+  font-size: x-small;
 }
 
-.border-left{
-    border: var(--bs-border-width);
-    border-style: solid;
-    border-color: var(--bs-border-color);
-    border-top: transparent;
-    border-right: transparent;
-    border-bottom: transparent;
+.quantity-input {
+  flex: none !important;
+  width: 20% !important;
 }
 
-.link{
-    color: blue;
-    text-decoration: underline;
-    cursor: pointer;
+.border-left {
+  border: var(--bs-border-width);
+  border-style: solid;
+  border-color: var(--bs-border-color);
+  border-top: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }

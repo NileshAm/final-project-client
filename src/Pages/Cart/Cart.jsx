@@ -5,14 +5,13 @@ import "./Cart.css";
 import numberWithCommas from "../../Utils/numberWithCommas";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useNavigate } from "react-router";
 
 const Cart = () => {
   const [cartData, setCartData] = useState([]);
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
 
-  console.log(encodeURIComponent(window.origin));
+
 
   useLayoutEffect(() => {
     axios.get(getServerURL(`/cart?id=sadun@gmail.com`)).then((res) => {
@@ -37,11 +36,11 @@ const Cart = () => {
     form.append("user", "sadun@gmail.com");
     form.append(
       "successURL",
-      encodeURIComponent(window.origin + "/checkout/success")
+      encodeURIComponent(window.origin + "/checkout/online/success")
     );
     form.append(
       "cancelURL",
-      encodeURIComponent(window.origin + "/checkout/cancel")
+      encodeURIComponent(window.origin + "/checkout/online/cancel")
     );
     axios.post(getServerURL("/checkout/online"), form, {}).then((res) => {
       if (res.data.completed) {
@@ -55,9 +54,9 @@ const Cart = () => {
     <>
       <nav>CART</nav>
       <div className="row">
-        <div className="col col-8">
+        <div className="col col-md-8 col-12">
           {cartData.length === 0 ? (
-            <div className="d-flex justify-content-center fs-3 text-body-tertiary ">
+            <div className="d-flex col-12 justify-content-center fs-3 text-body-tertiary ">
               No cart items added
             </div>
           ) : (
@@ -66,7 +65,7 @@ const Cart = () => {
             })
           )}
         </div>
-        <div className="col-4 border-left p-2 ps-3 ">
+        <div className="col-md-4 col-12 border-left p-2 ps-3 mt-3 mt-md-0">
           <div className="row fs-2 text-success fw-bold">
             <div className="col-3">Total :</div>
             <div className="col-9">{" " + numberWithCommas(total)}</div>
@@ -109,7 +108,7 @@ const Cart = () => {
           </div>
           <OptionSeparator />
           <button
-            className="btn btn-outline-success col-12 "
+            className="btn btn-outline-success col-12 mb-5 "
             onClick={() => {
               onlinePay();
             }}
@@ -142,9 +141,9 @@ const CartProduct = ({ product }) => {
     }
   };
   return (
-    <div className="border rounded-3 m-2 shadow-sm flex-row d-flex p-2">
-      <img src={product.Image} alt="" className="col-2 border rounded-2" />
-      <div className="ms-2 col-6 row">
+    <div className="row col-11 border rounded-3 m-2 shadow-sm flex-row d-flex p-2 me-3">
+      <img src={product.Image} alt="" className="col col-sm-2 col-12 border rounded-2" />
+      <div className="col ms-2 col-sm-5 col-12 ">
         <div className="text-success fw-bolder fs-4 ">{product.Name}</div>
         <div className="f-row d-flex align-items-center ">
           <div className="col-6">
@@ -185,10 +184,10 @@ const CartProduct = ({ product }) => {
           </div>
         </div>
       </div>
-      <div className="ro col-4 pe-2 d-flex flex-column justify-content-around ">
+      <div className="col row col-sm-4 col-12 pe-2 d-flex flex-column justify-content-around ">
         <div className="d-flex justify-content-end ">
           <i
-            className="btn btn-danger  bi bi-trash3-fill "
+            className="btn btn-danger  bi bi-trash3-fill m-2"
             onClick={() => {
               changeCartProduct(product, false, true);
             }}
