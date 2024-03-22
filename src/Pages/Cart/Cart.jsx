@@ -5,16 +5,28 @@ import "./Cart.css";
 import numberWithCommas from "../../Utils/numberWithCommas";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cartData, setCartData] = useState([]);
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
+  const [name, setName] = useState("");
 
+  const navigate = useNavigate();
 
+  axios.defaults.withCredentials = true;
+  axios.get(getServerURL("/login")).then((res) => {
+    console.log(res.data);
+    if (res.data.loggedIn) {
+      setName(res.data.user.Name);
+    } else {
+      navigate("/");
+    }
+  });
 
   useLayoutEffect(() => {
-    axios.get(getServerURL(`/cart?id=sadun@gmail.com`)).then((res) => {
+    axios.get(getServerURL(`/cart`)).then((res) => {
       setCartData(res.data);
 
       let tot = 0;
@@ -52,7 +64,7 @@ const Cart = () => {
 
   return (
     <>
-      <nav>CART</nav>
+      <nav>CART {name}</nav>
       <div className="row">
         <div className="col col-md-8 col-12">
           {cartData.length === 0 ? (
@@ -142,7 +154,11 @@ const CartProduct = ({ product }) => {
   };
   return (
     <div className="row col-11 border rounded-3 m-2 shadow-sm flex-row d-flex p-2 me-3">
-      <img src={product.Image} alt="" className="col col-sm-2 col-12 border rounded-2" />
+      <img
+        src={product.Image}
+        alt=""
+        className="col col-sm-2 col-12 border rounded-2"
+      />
       <div className="col ms-2 col-sm-5 col-12 ">
         <div className="text-success fw-bolder fs-4 ">{product.Name}</div>
         <div className="f-row d-flex align-items-center ">

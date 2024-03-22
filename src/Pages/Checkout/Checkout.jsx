@@ -8,26 +8,20 @@ import "./Checkout.css";
 const Checkout = () => {
   const navigate = useNavigate();
   let param = useParams();
-  let searchpara = new URLSearchParams(window.location.search);
 
   const isSuccess = param.state === "success";
-
-  if (param.method === "online" && !searchpara.get("session_id")) {
+  axios.defaults.withCredentials = true
+  if (param.method === "online" ) {
     if (param.state === "success") {
-      const form = new FormData();
-      form.append("user", "sadun@gmail.com");
-      form.append("session_id", searchpara.get("session_id"));
+
       axios
-        .post(getServerURL("/checkout/online/verify"), form, {})
+        .post(getServerURL("/checkout/online/verify"), {})
         .then((res) => {
           console.log(res);
         });
     } else if (param.state === "cancel") {
-      const form = new FormData();
-      form.append("user", "sadun@gmail.com");
-      form.append("session_id", searchpara.get("session_id"));
       axios
-        .post(getServerURL("/checkout/online/cancel"), form, {})
+        .post(getServerURL("/checkout/online/cancel"), {})
         .then((res) => {
           console.log(res);
         });

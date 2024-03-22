@@ -6,11 +6,15 @@ import getServerURL from "../../Utils/getServerURL";
 
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Login from "../../Components/Login/Login";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
   const [login, setLogin] = useState(false);
   const [name, setName] = useState("");
+  const [IsLogged, setIsLogged] = useState(false);
+
+  const navigate = useNavigate();
   //#region fetch data for products
   useLayoutEffect(() => {
     axios.get(getServerURL("/home")).then((res) => {
@@ -19,13 +23,11 @@ const HomePage = () => {
   }, []);
   //#endregion
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios.get(getServerURL("/login")).then((res) => {
+      setIsLogged(res.data.loggedIn)
       if (res.data.loggedIn) {
         setName(res.data.user.Name);
       }
@@ -41,6 +43,17 @@ const HomePage = () => {
             }}
           >
             account
+          </button>
+          <button
+            onClick={()=>{
+              if(IsLogged){
+                navigate("/cart")
+              }else{
+                alert("login")
+              }
+            }}
+          >
+            cart
           </button>
           <div>{name}</div>
           <div className="row d-flex justify-content-around m-0 p-2">
