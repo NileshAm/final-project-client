@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./Pages/HomePage/HomePage";
-import About from "./Pages/About/About";
-import CheckAdminLogin from "./Components/CheckAdminLogin/CheckAdminLogin";
-import AdminLogin from "./Pages/AdminLogin/AdminLogin";
-import SignUp from "./Pages/SignUp/SignUp";
+import HomePage from "Pages/HomePage/HomePage";
+import About from "Pages/About/About";
+import CheckAdminLogin from "Components/CheckAdminLogin/CheckAdminLogin";
+import AdminLogin from "Pages/AdminLogin/AdminLogin";
+import SignUp from "Pages/SignUp/SignUp";
+import AddProduct from "Pages/AddProduct/AddProduct";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route index element={<h1>Admin home</h1>} />
           <Route path="edit" element={<h1>edit</h1>} />
         </Route>
+          <Route path="/admin/add" element={<AddProduct/>} />
         <Route path="*" element={<h1>NotFound</h1>} />
       </Routes>
     </Router>
