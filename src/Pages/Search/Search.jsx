@@ -46,7 +46,7 @@ const Search = () => {
 
   return (
     <main>
-      <div className="p-2 fs-5 text-secondary">
+      <div className="p-2 fs-6 fs-md-5 font-size-lg  text-secondary">
         <span>Search results for </span>
         <span className="fw-bold  text-dark">{searchParam.term} </span>
         {searchParam.brands !== "" && (

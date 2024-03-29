@@ -80,7 +80,7 @@ const SearchPanel = () => {
         submit(event);
       }}
     >
-      <div className="col-4 offset-4">
+      <div className="col-lg-4 col-md-6 col-sm-8 col-12 offset-lg-4 offset-md-3 offset-sm-2 offset-0">
         <div className="input-group">
           <input
             type="text"
@@ -112,7 +112,7 @@ const SearchPanel = () => {
         id="FilterPanel"
       >
         <hr className="m-1 mt-3" />
-        <div className="col-3 ps-3 border-s">
+        <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
           <div>Brand</div>
           <div className="row" id="brands">
             {brand.map((brand, k) => {
@@ -128,7 +128,8 @@ const SearchPanel = () => {
             })}
           </div>
         </div>
-        <div className="col-3 ps-3 border-s">
+        <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
+          <hr className="m-2 d-lg-none d-md-none d-sm-none"/>
           <div>Category</div>
           <div className="row" id="category">
             {category.map((category, k) => {
@@ -144,7 +145,8 @@ const SearchPanel = () => {
             })}
           </div>
         </div>
-        <div className="col-3 ps-3 border-s">
+        <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
+          <hr className="m-2 d-lg-none d-md-none"/>
           <div>Rating</div>
           <div className="col-10 offset-1">
             <input
@@ -166,7 +168,8 @@ const SearchPanel = () => {
             </div>
           </div>
         </div>
-        <div className="col-3 ps-3 border-s">
+        <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
+          <hr className="m-2 d-lg-none"/>
           <div>Price</div>
           <div className="col-10 offset-1">
             <input
@@ -189,12 +192,12 @@ const SearchPanel = () => {
           </div>
         </div>
 
-        <div className="col-12 d-flex justify-content-center">
-          <button className="btn btn-success col-2 m-2" type="submit">
+        <div className="col-12 d-flex justify-content-center ms-1">
+          <button className="btn btn-success col-6 col-sm-4 col-md-3 col-lg-2 m-2" type="submit">
             Apply
           </button>
           <button
-            className="btn btn-danger col-2 m-2"
+            className="btn btn-danger col-6 col-sm-4 col-md-3 col-lg-2 m-2"
             onClick={() => {
               navigate(
                 `/search?term=&brands=&categories=&rating=0&price=500000`
