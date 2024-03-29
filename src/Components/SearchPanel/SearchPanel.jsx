@@ -34,7 +34,8 @@ const SearchPanel = () => {
       setCheckList("brands", params.get("brands").split(","));
       setCheckList("category", params.get("categories").split(","));
     }
-  }, [brand, category, params]);
+    //eslint-disable-next-line
+  }, [brand, category]);
 
   const getCheckList = (id) => {
     const selectList = [];
