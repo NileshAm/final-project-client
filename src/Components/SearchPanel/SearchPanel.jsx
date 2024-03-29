@@ -37,6 +37,7 @@ const SearchPanel = () => {
     //eslint-disable-next-line
   }, [brand, category]);
 
+
   const getCheckList = (id) => {
     const selectList = [];
     const list = document.getElementById(id).getElementsByTagName("input");
