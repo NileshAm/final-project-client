@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "Pages/HomePage/HomePage";
-import About from "Pages/About/About";
-import CheckAdminLogin from "Components/CheckAdminLogin/CheckAdminLogin";
-import AdminLogin from "Pages/AdminLogin/AdminLogin";
-import SignUp from "Pages/SignUp/SignUp";
-import AddProduct from "Pages/AddProduct/AddProduct";
+import HomePage from "./Pages/HomePage/HomePage";
+import About from "./Pages/About/About";
+import CheckAdminLogin from "./Components/CheckAdminLogin/CheckAdminLogin";
+import AdminLogin from "./Pages/AdminLogin/AdminLogin";
+import SignUp from "./Pages/SignUp/SignUp";
+import AddProduct from "./Pages/AddProduct/AddProduct";
 
 function App() {
   return (

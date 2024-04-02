@@ -1,5 +1,5 @@
-import { FormGroup } from "Components/FormGroup/FormGroup";
-import getServerURL from "Utils/getServerURL";
+import { FormGroup } from "../../Components/FormGroup/FormGroup";
+import getServerURL from "../../Utils/getServerURL";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 

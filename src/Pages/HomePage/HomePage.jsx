@@ -21,8 +21,9 @@ const HomePage = () => {
   axios.defaults.withCredentials = true;
   useEffect(() => {
     axios.get(getServerURL("/login")).then((res) => {
-      console.log(res);
-      setName(res.data.user.Name);
+      if (res.data.loggedIn) {
+        setName(res.data.user.Name);
+      }
     });
   }, [login]);
   return (
