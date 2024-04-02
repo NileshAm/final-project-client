@@ -1,11 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import HomePage from "./Pages/HomePage/HomePage";
 import About from "./Pages/About/About";
 import CheckAdminLogin from "./Components/CheckAdminLogin/CheckAdminLogin";
 import AdminLogin from "./Pages/AdminLogin/AdminLogin";
 import SignUp from "./Pages/SignUp/SignUp";
+
+import Cart from "./Pages/Cart/Cart";
+import Checkout from "./Pages/Checkout/Checkout";
 import HeaderFooter from "./Components/HeaderFooter/HeaderFooter";
 import Search from "./Pages/Search/Search";
+
 
 function App() {
   return (
@@ -13,6 +22,7 @@ function App() {
     <>
       <Router>
         <Routes>
+
           <Route path="/signup" element={<SignUp />} />
 
           <Route path="/" element={<HeaderFooter />}>
