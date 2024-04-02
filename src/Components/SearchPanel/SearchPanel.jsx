@@ -122,7 +122,7 @@ const SearchPanel = () => {
                 <CheckBox
                   key={k}
                   label={brand.Name}
-                  id="brand"
+                  id={brand.Name}
                   className="col-6"
                   value={brand.ID}
                 />
@@ -139,7 +139,7 @@ const SearchPanel = () => {
                 <CheckBox
                   key={k}
                   label={category.Category}
-                  id="category"
+                  id={category.Category}
                   className="col-6"
                   value={category.ID}
                 />

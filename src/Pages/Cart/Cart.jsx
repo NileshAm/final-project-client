@@ -11,16 +11,13 @@ const Cart = () => {
   const [cartData, setCartData] = useState([]);
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
-  const [name, setName] = useState("");
 
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
   axios.get(getServerURL("/login")).then((res) => {
     console.log(res.data);
-    if (res.data.loggedIn) {
-      setName(res.data.user.Name);
-    } else {
+    if (!res.data.loggedIn) {
       navigate("/");
     }
   });
@@ -74,7 +71,6 @@ const Cart = () => {
 
   return (
     <>
-      <nav>CART {name}</nav>
       <div className="row">
         <div className="col col-md-8 col-12">
           {cartData.length === 0 ? (

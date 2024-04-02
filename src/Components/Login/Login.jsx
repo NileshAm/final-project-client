@@ -5,8 +5,11 @@ import Logo from "../../logo.svg";
 import axios from "axios";
 import getServerURL from "../../Utils/getServerURL";
 import { FormGroup } from "../FormGroup/FormGroup";
+import { useNavigate } from "react-router";
 
-const Login = ({ stateSetter, state, children }) => {
+const Login = ({ stateSetter, state, redirect, setRedirect, children }) => {
+  const navigate = useNavigate();
+
   const [fieldError, setFieldError] = useState("");
 
   const submit = (event) => {
@@ -24,6 +27,10 @@ const Login = ({ stateSetter, state, children }) => {
     axios.post(getServerURL("/login/user"), form, {}).then((res) => {
       console.log(res.data.Access);
       if (res.data.Access) {
+        if (redirect) {
+          navigate(redirect);
+          setRedirect(null);
+        }
         stateSetter(false);
       } else {
         setFieldError("Invaid username or password");
@@ -33,11 +40,18 @@ const Login = ({ stateSetter, state, children }) => {
   const textChange = () => {
     setFieldError("");
   };
+
   return (
     <>
       {state && (
         <form
           className="container-fluid p-0 login d-flex justify-content-center align-items-center px-3 px-sm-0"
+          style={{
+            width: document.documentElement.clientWidth,
+          }}
+          onScroll={() => {
+            window.scrollTo(0, 0);
+          }}
           onSubmit={submit}
           onClick={() => {
             stateSetter(false);
