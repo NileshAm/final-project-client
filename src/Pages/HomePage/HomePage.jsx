@@ -1,3 +1,6 @@
+
+import Footer from '../../Components/Footer/Footer'
+
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
@@ -7,6 +10,7 @@ import getServerURL from "../../Utils/getServerURL";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Login from "../../Components/Login/Login";
 import { useNavigate } from "react-router-dom";
+
 
 const HomePage = () => {
   const [data, setData] = useState([]);
@@ -34,6 +38,7 @@ const HomePage = () => {
     });
   }, [login]);
   return (
+
     <>
       <main className="container-fluid m-0 p-0">
         <Login stateSetter={setLogin} state={login}>
