@@ -45,7 +45,6 @@ const Cart = () => {
 
   const onlinePay = () => {
     const form = new FormData();
-    form.append("user", "sadun@gmail.com");
     form.append(
       "successURL",
       encodeURIComponent(window.origin + "/checkout/online/success")
@@ -58,6 +57,17 @@ const Cart = () => {
       if (res.data.completed) {
         console.log(res.data.url);
         window.location = res.data.url;
+      }
+    });
+  };
+  const bannkPay = (event) => {
+    event.preventDefault();
+    const form = new FormData(event.target);
+    axios.post(getServerURL("/checkout/bank"), form, {}).then((res) => {
+      if (res.data.code === 200) {
+        navigate("/checkout/bank/success");
+      } else {
+        navigate("/checkout/bank/cancel");
       }
     });
   };
@@ -87,11 +97,15 @@ const Cart = () => {
             <div className="col-9">{" " + numberWithCommas(discount)}</div>
           </div>
           <hr />
-          <div>
+          <form
+            onSubmit={(event) => {
+              bannkPay(event);
+            }}
+          >
             <input
               type="file"
-              name=""
-              id=""
+              name="image"
+              id="image"
               className="form-control rounded-bottom-0  "
               accept=".pdf,.png,.jpg"
               disabled={cartData.length === 0}
@@ -117,7 +131,7 @@ const Cart = () => {
               </span>{" "}
               method
             </div>
-          </div>
+          </form>
           <OptionSeparator />
           <button
             className="btn btn-outline-success col-12 mb-5 "
