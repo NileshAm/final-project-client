@@ -22,16 +22,19 @@ function App() {
     <>
       <Router>
         <Routes>
-
           <Route path="/signup" element={<SignUp />} />
 
           <Route path="/" element={<HeaderFooter />}>
+
+            <Route path="home" element={<Navigate to={"/"} />} />
             <Route index element={<HomePage />} />
             <Route path="about" element={<About />} />
-            <Route path="cart" element={<h1>cart</h1>} />
-            <Route path="search" element={<Search/>} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="search" element={<Search />} />
             <Route path="login" element={<h1>Login</h1>} />
           </Route>
+
+          <Route path="/checkout/:method/:state" element={<Checkout/>} />
 
           <Route path="/admin/login" element={<AdminLogin />} />
 
