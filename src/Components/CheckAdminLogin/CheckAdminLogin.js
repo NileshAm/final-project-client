@@ -12,7 +12,7 @@ const CheckAdminLogin = () => {
 
   useLayoutEffect(() => {
     axios.get(getServerURL("/login")).then((res) => {
-      if (!res.data.loggedIn) {
+      if (!res.data.loggedIn || !res.data.user.isAdmin) {
         navigate("/admin/login");
       } else {
         setName(res.data.user.Name);
