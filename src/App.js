@@ -15,6 +15,7 @@ import Cart from "./Pages/Cart/Cart";
 import Checkout from "./Pages/Checkout/Checkout";
 import HeaderFooter from "./Components/HeaderFooter/HeaderFooter";
 import Search from "./Pages/Search/Search";
+import AdminHome from "./Pages/AdminHome/AdminHome";
 
 
 function App() {
@@ -40,8 +41,8 @@ function App() {
           <Route path="/admin/login" element={<AdminLogin />} />
 
           <Route path="/admin" element={<CheckAdminLogin />}>
-            <Route index element={<h1>Admin home</h1>} />
-            <Route path="edit" element={<h1>edit</h1>} />
+            <Route index element={<AdminHome/>} />
+            <Route path="update" element={<h1>edit</h1>} />
           </Route>
           <Route path="*" element={<h1>NotFound</h1>} />
         </Routes>
