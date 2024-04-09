@@ -10,6 +10,7 @@ import CheckAdminLogin from "./Components/CheckAdminLogin/CheckAdminLogin";
 
 import AdminLogin from "./Pages/AdminLogin/AdminLogin";
 import SignUp from "./Pages/SignUp/SignUp";
+import AddProduct from "./Pages/AddProduct/AddProduct";
 
 import Cart from "./Pages/Cart/Cart";
 import Checkout from "./Pages/Checkout/Checkout";
