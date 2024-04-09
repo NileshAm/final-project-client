@@ -1,0 +1,9 @@
+.border-s{
+    border-width: 1px;
+    border-style: solid;
+    border-color: grey;
+
+    border-top: transparent;
+    border-right: transparent;
+    border-bottom: transparent;
+}
