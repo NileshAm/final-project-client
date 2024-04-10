@@ -87,6 +87,7 @@ const Login = () => {
           className={"mt-3"}
           type={"email"}
           onChange={textChange}
+          d={"admin@admin.com"}
         />
         <FormGroup
           label={"Password"}
@@ -94,6 +95,7 @@ const Login = () => {
           className={"mt-3"}
           type={"password"}
           onChange={textChange}
+          d={"Admin"}
         />
         {fieldError !== "" && (
           <div className="bg-danger-subtle d-flex justify-content-center mt-3 rounded-3  p-1 text-danger">

@@ -18,7 +18,6 @@ import HeaderFooter from "./Components/HeaderFooter/HeaderFooter";
 import Search from "./Pages/Search/Search";
 import AdminHome from "./Pages/AdminHome/AdminHome";
 
-
 function App() {
   return (
     // TODO : change all h1 tags with components
@@ -28,7 +27,6 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
 
           <Route path="/" element={<HeaderFooter />}>
-
             <Route path="home" element={<Navigate to={"/"} />} />
             <Route index element={<HomePage />} />
             <Route path="about" element={<About />} />
@@ -37,12 +35,13 @@ function App() {
             <Route path="login" element={<h1>Login</h1>} />
           </Route>
 
-          <Route path="/checkout/:method/:state" element={<Checkout/>} />
+          <Route path="/checkout/:method/:state" element={<Checkout />} />
 
           <Route path="/admin/login" element={<AdminLogin />} />
 
           <Route path="/admin" element={<CheckAdminLogin />}>
-            <Route index element={<AdminHome/>} />
+            <Route index element={<AdminHome />} />
+            <Route path="add" element={<AddProduct />} />
             <Route path="update" element={<h1>edit</h1>} />
           </Route>
           <Route path="*" element={<h1>NotFound</h1>} />

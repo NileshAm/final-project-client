@@ -7,6 +7,7 @@ import getServerURL from "../../Utils/getServerURL";
 import numberWithCommas from "../../Utils/numberWithCommas";
 import { CheckBox } from "../CheckBox/CheckBox";
 import ProductCard from "../ProductCard/ProductCard";
+import { RadioBtn } from "../RadioBtn/RadioBtn";
 const AdminSearch = () => {
   const navigate = useNavigate();
 
@@ -86,7 +87,7 @@ const AdminSearch = () => {
         </div>
         <div className="collapse row me-0 show">
           <hr className="m-1 mt-3" />
-          <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
+          <div className="col-lg-2 col-md-4 col-sm-6 col-12 ps-3 border-s">
             <div>Brand</div>
             <div className="row" id="brands">
               {brand.map((brand, k) => {
@@ -102,7 +103,7 @@ const AdminSearch = () => {
               })}
             </div>
           </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
+          <div className="col-lg-2 col-md-4 col-sm-6 col-12 ps-3 border-s">
             <hr className="m-2 d-lg-none d-md-none d-sm-none" />
             <div>Category</div>
             <div className="row" id="category">
@@ -119,7 +120,7 @@ const AdminSearch = () => {
               })}
             </div>
           </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
+          <div className="col-lg-2 col-md-4 col-sm-6 col-12 ps-3 border-s">
             <hr className="m-2 d-lg-none d-md-none" />
             <div>Rating</div>
             <div className="col-10 offset-1">
@@ -142,7 +143,7 @@ const AdminSearch = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
+          <div className="col-lg-2 col-md-4 col-sm-6 col-12 ps-3 border-s">
             <hr className="m-2 d-lg-none" />
             <div>Price</div>
             <div className="col-10 offset-1">
@@ -163,6 +164,14 @@ const AdminSearch = () => {
                 <p>{numberWithCommas(0)}</p>
                 <p>{numberWithCommas(price)}</p>
               </div>
+            </div>
+          </div>
+          <div className="col-lg-2 col-md-4 col-sm-6 col-12 ps-3 border-s">
+            <hr className="m-2 d-lg-none" />
+            <div>Statues</div>
+            <div className="col-10 offset-1">
+              <RadioBtn id={"Statue"} label={"Active"} defaultValue />
+              <RadioBtn id={"Statue"} label={"Inactive"} />
             </div>
           </div>
 

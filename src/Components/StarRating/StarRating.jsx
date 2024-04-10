@@ -1,7 +1,7 @@
 import React from "react";
 
 const StarRating = ({ Rating, starSize, className }) => {
-  if (!Rating) {
+  if (Rating === undefined) {
     throw new Error("Rating Prop must be assigned");
   }
 

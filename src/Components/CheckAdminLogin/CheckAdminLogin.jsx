@@ -17,6 +17,10 @@ const CheckAdminLogin = () => {
   });
   return (
     <>
+      <nav className="d-flex justify-content-around ">
+        <a href="/admin">home</a>
+        <button>logout</button>
+      </nav>
       <Outlet />
     </>
   );
