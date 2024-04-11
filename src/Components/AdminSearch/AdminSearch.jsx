@@ -40,6 +40,12 @@ const AdminSearch = () => {
     form.append("rating", document.getElementById("rating").value);
     form.append("isAdmin", true);
 
+    document.getElementsByName("Statue").forEach((element) => {
+      if (element.checked) {
+        form.append("status", element.value);
+      }
+    });
+
     axios.post(getServerURL("/search"), form, {}).then((res) => {
       setData(res.data);
     });
@@ -170,8 +176,25 @@ const AdminSearch = () => {
             <hr className="m-2 d-lg-none" />
             <div>Statues</div>
             <div className="col-10 offset-1">
-              <RadioBtn id={"Statue"} label={"Active"} defaultValue />
-              <RadioBtn id={"Statue"} label={"Inactive"} />
+              <RadioBtn
+                id={"Statue"}
+                label={"All"}
+                defaultValue
+                value={undefined}
+                className={"col-12"}
+              />
+              <RadioBtn
+                id={"Statue"}
+                label={"Active"}
+                value={"1"}
+                className={"col-12"}
+              />
+              <RadioBtn
+                id={"Statue"}
+                label={"Inactive"}
+                value={"0"}
+                className={"col-12"}
+              />
             </div>
           </div>
 
@@ -199,10 +222,15 @@ const AdminSearch = () => {
           </div>
         </div>
       </form>
+      
       <div className="row d-flex justify-content-around">
-        {data.map((v, k) => {
-          return <ProductCard data={v} admin />;
-        })}
+        {data.length === 0 ? (
+          <p className="p-3">No Items under given filters</p>
+        ) : (
+          data.map((v, k) => {
+            return <ProductCard data={v} key={k} admin />;
+          })
+        )}
       </div>
     </>
   );

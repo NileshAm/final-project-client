@@ -140,6 +140,7 @@ const AddProduct = () => {
               id={"brand"}
               label={"hidden"}
               value={undefined}
+              className={"col-3"}
               hidden
               defaultValue
             />
@@ -149,6 +150,7 @@ const AddProduct = () => {
                   id={"brand"}
                   label={brand.Name}
                   value={brand.ID}
+                  className={"col-3"}
                   key={k}
                   onChange={() => {
                     errorSetter();
@@ -163,6 +165,7 @@ const AddProduct = () => {
               id={"category"}
               label={"hidden"}
               value={undefined}
+              className={"col-3"}
               hidden
               defaultValue
             />
@@ -172,6 +175,7 @@ const AddProduct = () => {
                   id={"category"}
                   label={cat.Category}
                   value={cat.ID}
+                  className={"col-3"}
                   key={k}
                   onChange={() => {
                     errorSetter();

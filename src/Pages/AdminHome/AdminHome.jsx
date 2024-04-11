@@ -15,22 +15,12 @@ const AdminHome = () => {
             navigate("/admin/approve")
           }}
         >
-          <i class="bi bi-journal-check m-2"></i>
+          <i className="bi bi-journal-check m-2"></i>
           Approve Reservations
-          <span class=" badge rounded-pill bg-danger fs-7 mx-2 ">
+          <span className=" badge rounded-pill bg-danger fs-7 mx-2 ">
             9+
-            <span class="visually-hidden">unread messages</span>
+            <span className="visually-hidden">unread messages</span>
           </span>
-        </button>
-        <button
-          type="button"
-          className="col col-11 col-md-3 m-3 btn btn-outline-warning fs-5"
-          onClick={()=>{
-            navigate("/admin/update")
-          }}
-        >
-          <i class="bi bi-arrow-repeat m-2"></i>
-          Update Product
         </button>
         <button
           type="button"
@@ -39,7 +29,7 @@ const AdminHome = () => {
             navigate("/admin/add")
           }}
         >
-          <i class="bi bi-upload m-2"></i>
+          <i className="bi bi-upload m-2"></i>
           Add New Product
         </button>
       </div>

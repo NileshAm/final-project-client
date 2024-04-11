@@ -7,9 +7,10 @@ export const RadioBtn = ({
   onChange,
   hidden,
   defaultValue,
+  className,
 }) => {
   return (
-    <div className="col-3" hidden={hidden}>
+    <div className={className} hidden={hidden}>
       <input
         type="radio"
         name={id}

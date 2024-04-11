@@ -17,6 +17,7 @@ import Checkout from "./Pages/Checkout/Checkout";
 import HeaderFooter from "./Components/HeaderFooter/HeaderFooter";
 import Search from "./Pages/Search/Search";
 import AdminHome from "./Pages/AdminHome/AdminHome";
+import AdminUpdate from "./Pages/AdminUpdate/AdminUpdate";
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
           <Route path="/admin" element={<CheckAdminLogin />}>
             <Route index element={<AdminHome />} />
             <Route path="add" element={<AddProduct />} />
-            <Route path="update" element={<h1>edit</h1>} />
+            <Route path="update" element={<AdminUpdate />} />
           </Route>
           <Route path="*" element={<h1>NotFound</h1>} />
         </Routes>
