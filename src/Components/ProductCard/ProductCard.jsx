@@ -147,6 +147,7 @@ const AdminView = ({ data }) => {
             .then((res) => {
               if (res.status === 200) {
                 alert("Deleted");
+                window.location.reload()
               } else {
                 alert("error occured");
               }

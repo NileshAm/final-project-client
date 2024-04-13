@@ -18,6 +18,7 @@ import HeaderFooter from "./Components/HeaderFooter/HeaderFooter";
 import Search from "./Pages/Search/Search";
 import AdminHome from "./Pages/AdminHome/AdminHome";
 import AdminUpdate from "./Pages/AdminUpdate/AdminUpdate";
+import AdminApprove from "Pages/AdminApprove/AdminApprove";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route index element={<AdminHome />} />
             <Route path="add" element={<AddProduct />} />
             <Route path="update" element={<AdminUpdate />} />
+            <Route path="approve" element={<AdminApprove/>} />
           </Route>
           <Route path="*" element={<h1>NotFound</h1>} />
         </Routes>

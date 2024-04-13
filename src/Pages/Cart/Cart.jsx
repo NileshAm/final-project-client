@@ -11,6 +11,7 @@ const Cart = () => {
   const [cartData, setCartData] = useState([]);
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -60,6 +61,10 @@ const Cart = () => {
   const bannkPay = (event) => {
     event.preventDefault();
     const form = new FormData(event.target);
+    if (form.get("image").name === "") {
+      setError("Add the payment reciept below before submmiting");
+      return;
+    }
     axios.post(getServerURL("/checkout/bank"), form, {}).then((res) => {
       if (res.data.code === 200) {
         navigate("/checkout/bank/success");
@@ -98,6 +103,14 @@ const Cart = () => {
               bannkPay(event);
             }}
           >
+            <div
+              className={
+                "bg-danger-subtle p-2 m-1 rounded-3 text-danger text-align-center fw-bold " +
+                (error !== "" ? "show" : "collapse")
+              }
+            >
+              {error}
+            </div>
             <input
               type="file"
               name="image"
@@ -105,10 +118,13 @@ const Cart = () => {
               className="form-control rounded-bottom-0  "
               accept=".pdf,.png,.jpg"
               disabled={cartData.length === 0}
+              onChange={() => {
+                setError("");
+              }}
             />
             <button
               className="btn btn-outline-success col-12 rounded-top-0 "
-              disabled={cartData.length === 0}
+              disabled={cartData.length === 0 || error !== ""}
             >
               <i className="bi bi-receipt me-2"></i>Submit receipt
             </button>

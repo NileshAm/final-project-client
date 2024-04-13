@@ -19,7 +19,12 @@ const CheckAdminLogin = () => {
     <>
       <nav className="d-flex justify-content-around ">
         <a href="/admin">home</a>
-        <button>logout</button>
+        <button onClick={()=>{
+          axios.defaults.withCredentials = true;
+          axios.get(getServerURL("/logout")).then(()=>{
+            window.location.href = "/admin/login"
+          })
+        }}>logout</button>
       </nav>
       <Outlet />
     </>
