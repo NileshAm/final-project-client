@@ -19,6 +19,7 @@ import Search from "./Pages/Search/Search";
 import AdminHome from "./Pages/AdminHome/AdminHome";
 import AdminUpdate from "./Pages/AdminUpdate/AdminUpdate";
 import AdminApprove from "Pages/AdminApprove/AdminApprove";
+import AdminPickup from "Pages/AdminPickup/AdminPickup";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="add" element={<AddProduct />} />
             <Route path="update" element={<AdminUpdate />} />
             <Route path="approve" element={<AdminApprove/>} />
+            <Route path="pickup" element={<AdminPickup/>} />
           </Route>
           <Route path="*" element={<h1>NotFound</h1>} />
         </Routes>

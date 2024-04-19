@@ -9,10 +9,14 @@ const AdminHome = () => {
   const navigate = useNavigate();
 
   const [approvalCount, setApprovalCount] = useState(0);
+  const [pickupCount, setPickupCount] = useState(0);
 
   useLayoutEffect(() => {
     axios.get(getServerURL("/admin/approvals/count")).then((res) => {
       setApprovalCount(res.data.length);
+    });
+    axios.get(getServerURL("/admin/pickup/count")).then((res) => {
+      setPickupCount(res.data.length);
     });
   }, []);
   return (
@@ -30,6 +34,22 @@ const AdminHome = () => {
           {approvalCount !== 0 && (
             <span className=" badge rounded-pill bg-danger fs-7 mx-2 ">
               {approvalCount}
+              <span className="visually-hidden">unread messages</span>
+            </span>
+          )}
+        </button>
+        <button
+          type="button"
+          className="col col-11 col-md-3 m-3 btn btn-outline-warning fs-5"
+          onClick={() => {
+            navigate("/admin/pickup");
+          }}
+        >
+          <i className="bi bi-bag-check-fill m-2"></i>
+          Pick ups
+          {pickupCount !== 0 && (
+            <span className=" badge rounded-pill bg-danger fs-7 mx-2 ">
+              {pickupCount}
               <span className="visually-hidden">unread messages</span>
             </span>
           )}

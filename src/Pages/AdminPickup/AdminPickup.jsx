@@ -3,10 +3,10 @@ import numberWithCommas from "Utils/numberWithCommas";
 import axios from "axios";
 import React, { useLayoutEffect, useState } from "react";
 
-const AdminApprove = () => {
+const AdminPickup = () => {
   const [data, setData] = useState([]);
   useLayoutEffect(() => {
-    axios.get(getServerURL("/admin/approvals/items")).then((res) => {
+    axios.get(getServerURL("/admin/pickup/items")).then((res) => {
       console.log(res.data);
       if (res.data) {
         setData(res.data);
@@ -17,7 +17,7 @@ const AdminApprove = () => {
     <main className="p-md-2 p-1">
       <div className="accordion" id="accordionExample">
         {data.length === 0 ? (
-          <div className="fs-3 text-body-tertiary">No Pending Approves...</div>
+          <div className="fs-3 text-body-tertiary">No Pending Pickups...</div>
         ) : (
           data.map((v, k) => {
             return <AccordionItem data={v} key={k} />;
@@ -33,16 +33,13 @@ const AccordionItem = ({ data }) => {
   form.append("CartID", data.CartID);
 
   const submit = (state) => {
-    if (!["approve", "deny"].includes(state)) {
-      throw new Error("State must be either 'approved' or 'denied'");
-    }
     //eslint-disable-next-line
-    if (!confirm(`Are you sure you want to ${state} this transaction?`)) {
+    if (!confirm(`Are you sure you want to mark this transaction as pickuped up?`)) {
       return;
     }
-    axios.post(getServerURL(`/admin/approvals/${state}`), form).then((res) => {
+    axios.post(getServerURL(`/admin/pickup`), form).then((res) => {
       if (res.data.code === 200) {
-        alert(`Transaction ${state.replace("y", "ie") + "d"} successfully`);
+        alert(`Order picked up successfully`);
         window.location.reload();
       }
     });
@@ -71,17 +68,12 @@ const AccordionItem = ({ data }) => {
         data-bs-parent="#accordionExample"
       >
         <div className="accordion-body row p-md-3 p-1">
-          <img
-            src={data.Image}
-            alt="Payment Verifier"
-            className="col-md-6 col-12"
-          />
-          <div className="col-md-6 col-12 px-md-3 py-2">
-            <div className="row col-12 pb-2 pt-md-0 pt-2">
+          <div className="col-12 py-2 row">
+            <div className="row col-12 col-md-6 pb-2 pt-md-0 pt-2">
               <span className="col-12">Customer Name : {data.Name}</span>
               <span className="col-12">Customer Contact : {data.Contact}</span>
             </div>
-            <div className="border p-2 rounded">
+            <div className="border p-2 rounded col-12 col-md-6">
               {data.Items.map((v, k) => {
                 console.log(k);
                 return (
@@ -106,19 +98,12 @@ const AccordionItem = ({ data }) => {
               <button
                 className="btn col-12 btn-outline-success m-1"
                 onClick={() => {
-                  submit("approve");
+                  submit();
                 }}
               >
-                Approve
+                Pick Up
               </button>
-              <button
-                className="btn col-12 btn-outline-danger m-1"
-                onClick={() => {
-                  submit("deny");
-                }}
-              >
-                Decline
-              </button>
+              
             </div>
           </div>
         </div>
@@ -183,4 +168,4 @@ const ProductItem = ({ data }) => {
   );
 };
 
-export default AdminApprove;
+export default AdminPickup;
