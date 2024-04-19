@@ -10,12 +10,16 @@ import CheckAdminLogin from "./Components/CheckAdminLogin/CheckAdminLogin";
 
 import AdminLogin from "./Pages/AdminLogin/AdminLogin";
 import SignUp from "./Pages/SignUp/SignUp";
+import AddProduct from "./Pages/AddProduct/AddProduct";
 
 import Cart from "./Pages/Cart/Cart";
 import Checkout from "./Pages/Checkout/Checkout";
 import HeaderFooter from "./Components/HeaderFooter/HeaderFooter";
 import Search from "./Pages/Search/Search";
-
+import AdminHome from "./Pages/AdminHome/AdminHome";
+import AdminUpdate from "./Pages/AdminUpdate/AdminUpdate";
+import AdminApprove from "Pages/AdminApprove/AdminApprove";
+import AdminPickup from "Pages/AdminPickup/AdminPickup";
 
 function App() {
   return (
@@ -26,7 +30,6 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
 
           <Route path="/" element={<HeaderFooter />}>
-
             <Route path="home" element={<Navigate to={"/"} />} />
             <Route index element={<HomePage />} />
             <Route path="about" element={<About />} />
@@ -35,13 +38,16 @@ function App() {
             <Route path="login" element={<h1>Login</h1>} />
           </Route>
 
-          <Route path="/checkout/:method/:state" element={<Checkout/>} />
+          <Route path="/checkout/:method/:state" element={<Checkout />} />
 
           <Route path="/admin/login" element={<AdminLogin />} />
 
           <Route path="/admin" element={<CheckAdminLogin />}>
-            <Route index element={<h1>Admin home</h1>} />
-            <Route path="edit" element={<h1>edit</h1>} />
+            <Route index element={<AdminHome />} />
+            <Route path="add" element={<AddProduct />} />
+            <Route path="update" element={<AdminUpdate />} />
+            <Route path="approve" element={<AdminApprove/>} />
+            <Route path="pickup" element={<AdminPickup/>} />
           </Route>
           <Route path="*" element={<h1>NotFound</h1>} />
         </Routes>

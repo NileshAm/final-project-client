@@ -44,6 +44,16 @@ const HeaderFooter = () => {
           </button>
           <button
             onClick={() => {
+              axios.defaults.withCredentials = true;
+              axios.get(getServerURL("/logout")).then(() => {
+                window.location.reload()
+              });
+            }}
+          >
+            logout
+          </button>
+          <button
+            onClick={() => {
               if (IsLogged) {
                 navigate("/cart");
               } else {

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import "./SearchPanel.css";
 import getServerURL from "../../Utils/getServerURL";
 import numberWithCommas from "../../Utils/numberWithCommas";
+import { CheckBox } from "../CheckBox/CheckBox";
 const SearchPanel = () => {
   const navigate = useNavigate();
 
@@ -36,7 +37,6 @@ const SearchPanel = () => {
     }
     //eslint-disable-next-line
   }, [brand, category]);
-
 
   const getCheckList = (id) => {
     const selectList = [];
@@ -131,7 +131,7 @@ const SearchPanel = () => {
           </div>
         </div>
         <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
-          <hr className="m-2 d-lg-none d-md-none d-sm-none"/>
+          <hr className="m-2 d-lg-none d-md-none d-sm-none" />
           <div>Category</div>
           <div className="row" id="category">
             {category.map((category, k) => {
@@ -148,7 +148,7 @@ const SearchPanel = () => {
           </div>
         </div>
         <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
-          <hr className="m-2 d-lg-none d-md-none"/>
+          <hr className="m-2 d-lg-none d-md-none" />
           <div>Rating</div>
           <div className="col-10 offset-1">
             <input
@@ -171,7 +171,7 @@ const SearchPanel = () => {
           </div>
         </div>
         <div className="col-lg-3 col-md-4 col-sm-6 col-12 ps-3 border-s">
-          <hr className="m-2 d-lg-none"/>
+          <hr className="m-2 d-lg-none" />
           <div>Price</div>
           <div className="col-10 offset-1">
             <input
@@ -195,7 +195,10 @@ const SearchPanel = () => {
         </div>
 
         <div className="col-12 d-flex justify-content-center ms-1">
-          <button className="btn btn-success col-6 col-sm-4 col-md-3 col-lg-2 m-2" type="submit">
+          <button
+            className="btn btn-success col-6 col-sm-4 col-md-3 col-lg-2 m-2"
+            type="submit"
+          >
             Apply
           </button>
           <button
@@ -215,30 +218,6 @@ const SearchPanel = () => {
         </div>
       </div>
     </form>
-  );
-};
-
-const CheckBox = ({
-  label,
-  className,
-  hidden,
-  defaultChecked,
-  value,
-  id,
-  onChange,
-}) => {
-  return (
-    <div className={className} hidden={hidden}>
-      <input
-        type="checkbox"
-        defaultChecked={defaultChecked}
-        value={value}
-        name={id}
-        id={id}
-        onChange={onChange}
-      />
-      <label className="ms-1">{label}</label>
-    </div>
   );
 };
 

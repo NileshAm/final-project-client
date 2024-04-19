@@ -103,7 +103,7 @@ const AdminView = ({ data }) => {
       <button
         className="btn btn-success w-100 p-1 my-1"
         onClick={() => {
-          navigate(`/admin/edit?id=${ID}`);
+          navigate(`/admin/update?id=${ID}`);
         }}
       >
         Update Product
@@ -138,11 +138,16 @@ const AdminView = ({ data }) => {
       <button
         className="btn btn-danger w-100  p-1 my-1"
         onClick={() => {
+          // eslint-disable-next-line no-restricted-globals
+          if (!confirm("Are you sure you want to delete this product?")) {
+            return;
+          }
           axios
             .delete(getServerURL(`/admin/product/delete?id=${ID}`))
             .then((res) => {
               if (res.status === 200) {
                 alert("Deleted");
+                window.location.reload()
               } else {
                 alert("error occured");
               }

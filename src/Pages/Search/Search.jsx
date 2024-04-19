@@ -42,7 +42,8 @@ const Search = () => {
     axios.post(getServerURL("/search"), form, {}).then((res) => {
       setData(res.data);
     });
-  }, [params]);
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <main>
