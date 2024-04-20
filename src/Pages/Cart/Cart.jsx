@@ -6,6 +6,7 @@ import numberWithCommas from "../../Utils/numberWithCommas";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
+import ErrorField from "Components/ErrorField/ErrorField";
 
 const Cart = () => {
   const [cartData, setCartData] = useState([]);
@@ -103,14 +104,7 @@ const Cart = () => {
               bannkPay(event);
             }}
           >
-            <div
-              className={
-                "bg-danger-subtle p-2 m-1 rounded-3 text-danger text-align-center fw-bold " +
-                (error !== "" ? "show" : "collapse")
-              }
-            >
-              {error}
-            </div>
+            <ErrorField className={"mb-2"}>{error}</ErrorField>
             <input
               type="file"
               name="image"

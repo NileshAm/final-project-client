@@ -6,6 +6,7 @@ import axios from "axios";
 import getServerURL from "../../Utils/getServerURL";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { useNavigate } from "react-router";
+import ErrorField from "Components/ErrorField/ErrorField";
 
 const Login = ({ stateSetter, state, redirect, setRedirect, children }) => {
   const navigate = useNavigate();
@@ -25,7 +26,6 @@ const Login = ({ stateSetter, state, redirect, setRedirect, children }) => {
     }
 
     axios.post(getServerURL("/login/user"), form, {}).then((res) => {
-      console.log(res.data.Access);
       if (res.data.Access) {
         if (redirect) {
           navigate(redirect);
@@ -100,11 +100,7 @@ const Login = ({ stateSetter, state, redirect, setRedirect, children }) => {
               type={"password"}
               onChange={textChange}
             />
-            {fieldError !== "" && (
-              <div className="bg-danger-subtle d-flex justify-content-center mt-3 rounded-3  p-1 text-danger">
-                {fieldError}
-              </div>
-            )}
+            <ErrorField>{fieldError}</ErrorField>
             <button className="btn btn-outline-success mt-3" type="submit">
               Login
             </button>

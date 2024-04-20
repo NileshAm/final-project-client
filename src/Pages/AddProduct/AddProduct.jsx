@@ -3,6 +3,7 @@ import getServerURL from "../../Utils/getServerURL";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { RadioBtn } from "../../Components/RadioBtn/RadioBtn";
+import ErrorField from "Components/ErrorField/ErrorField";
 
 const AddProduct = () => {
   const [brands, setBrands] = useState([]);
@@ -185,11 +186,7 @@ const AddProduct = () => {
             })}
           </div>
         </div>
-        {error && (
-          <div className="col-12 bg-danger-subtle py-1 rounded text-danger d-flex justify-content-center mt-2">
-            {error}
-          </div>
-        )}
+        <ErrorField className={"col-11 "}>{error}</ErrorField>
         <button className="btn btn-success col-3 mt-2" disabled={isDisabled}>
           submit
         </button>

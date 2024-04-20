@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useLayoutEffect, useState } from "react";
 import "./AdminUpdate.css";
 import { CheckBox } from "Components/CheckBox/CheckBox";
+import ErrorField from "Components/ErrorField/ErrorField";
 
 const AddProduct = () => {
     const [error, setError] = useState(null);
@@ -162,11 +163,7 @@ const AddProduct = () => {
             }}
           />
         </div>
-        {error && (
-          <div className="col-12 bg-danger-subtle py-1 rounded text-danger d-flex justify-content-center mt-2">
-            {error}
-          </div>
-        )}
+        <ErrorField className={"col-11 "}>{error}</ErrorField>
         <button
           className="btn btn-success col-3 mt-2"
           disabled={

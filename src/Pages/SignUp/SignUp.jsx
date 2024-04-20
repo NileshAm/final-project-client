@@ -4,6 +4,7 @@ import "./SignUp.css";
 import { FormGroup } from "../../Components/FormGroup/FormGroup";
 import axios from "axios";
 import getServerURL from "../../Utils/getServerURL";
+import ErrorField from "Components/ErrorField/ErrorField";
 
 const SignUp = () => {
   const [fieldError, setFieldError] = useState("");
@@ -77,11 +78,7 @@ const SignUp = () => {
             type={"password"}
             onChange={textChange}
           />
-          {fieldError !== "" && (
-            <div className="bg-danger-subtle d-flex justify-content-center mt-3 rounded-3  p-1 text-danger">
-              {fieldError}
-            </div>
-          )}
+          <ErrorField>{fieldError}</ErrorField>
           <button type="submit" className="btn btn-success w-100 mt-3">
             Sign Up
           </button>

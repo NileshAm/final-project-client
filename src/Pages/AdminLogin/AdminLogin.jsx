@@ -6,6 +6,7 @@ import axios from "axios";
 import getServerURL from "../../Utils/getServerURL";
 import { useNavigate } from "react-router";
 import { FormGroup } from "../../Components/FormGroup/FormGroup";
+import ErrorField from "Components/ErrorField/ErrorField";
 
 const Login = () => {
   axios.defaults.withCredentials = true;
@@ -95,11 +96,7 @@ const Login = () => {
           type={"password"}
           onChange={textChange}
         />
-        {fieldError !== "" && (
-          <div className="bg-danger-subtle d-flex justify-content-center mt-3 rounded-3  p-1 text-danger">
-            {fieldError}
-          </div>
-        )}
+        <ErrorField>{fieldError}</ErrorField>
         <button className="btn btn-outline-success mt-3" type="submit">
           Login
         </button>
