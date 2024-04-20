@@ -7,6 +7,7 @@ import numberWithCommas from "../../Utils/numberWithCommas";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import ErrorField from "Components/ErrorField/ErrorField";
+import { LoadingButtton } from "Components/LoadingButton/LoadingButtton";
 
 const Cart = () => {
   const [cartData, setCartData] = useState([]);
@@ -52,21 +53,22 @@ const Cart = () => {
       "cancelURL",
       encodeURIComponent(window.origin + "/checkout/online/cancel")
     );
-    axios.post(getServerURL("/checkout/online"), form, {}).then((res) => {
-      if (res.data.completed) {
-        console.log(res.data.url);
-        window.location = res.data.url;
-      }
-    });
+    return axios
+      .post(getServerURL("/checkout/online"), form, {})
+      .then((res) => {
+        if (res.data.completed) {
+          console.log(res.data.url);
+          window.location = res.data.url;
+        }
+      });
   };
-  const bannkPay = (event) => {
-    event.preventDefault();
-    const form = new FormData(event.target);
+  const bankPay = () => {
+    const form = new FormData(document.forms[0]);
     if (form.get("image").name === "") {
       setError("Add the payment reciept below before submmiting");
       return;
     }
-    axios.post(getServerURL("/checkout/bank"), form, {}).then((res) => {
+    return axios.post(getServerURL("/checkout/bank"), form, {}).then((res) => {
       if (res.data.code === 200) {
         navigate("/checkout/bank/success");
       } else {
@@ -100,9 +102,6 @@ const Cart = () => {
           </div>
           <hr />
           <form
-            onSubmit={(event) => {
-              bannkPay(event);
-            }}
           >
             <ErrorField className={"mb-2"}>{error}</ErrorField>
             <input
@@ -116,12 +115,20 @@ const Cart = () => {
                 setError("");
               }}
             />
-            <button
+            <LoadingButtton
               className="btn btn-outline-success col-12 rounded-top-0 "
               disabled={cartData.length === 0 || error !== ""}
-            >
-              <i className="bi bi-receipt me-2"></i>Submit receipt
-            </button>
+              normalContent={
+                <>
+                  <i className="bi bi-receipt me-2"></i>
+                  <span>Submit receipt</span>
+                </>
+              }
+              loadingContent={"Processing..."}
+              onClick={() => {
+                return bankPay()
+              }}
+            />
             <div className="text-warning fs-xs mt-2">
               *This method can take few bussiness for approval process.
               <br />
@@ -139,15 +146,20 @@ const Cart = () => {
             </div>
           </form>
           <OptionSeparator />
-          <button
+          <LoadingButtton
             className="btn btn-outline-success col-12 mb-5 "
             onClick={() => {
-              onlinePay();
+              return onlinePay();
             }}
             disabled={cartData.length === 0}
-          >
-            <i className="bi bi-credit-card me-2"></i>Pay Online
-          </button>
+            normalContent={
+              <>
+                <i className="bi bi-credit-card me-2"></i>
+                <span>Pay Online</span>
+              </>
+            }
+            loadingContent={"Proccessing..."}
+          />
         </div>
       </div>
     </>

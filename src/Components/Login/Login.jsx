@@ -7,16 +7,16 @@ import getServerURL from "../../Utils/getServerURL";
 import { FormGroup } from "../FormGroup/FormGroup";
 import { useNavigate } from "react-router";
 import ErrorField from "Components/ErrorField/ErrorField";
+import { LoadingButtton } from "Components/LoadingButton/LoadingButtton";
 
 const Login = ({ stateSetter, state, redirect, setRedirect, children }) => {
   const navigate = useNavigate();
 
   const [fieldError, setFieldError] = useState("");
 
-  const submit = (event) => {
-    event.preventDefault();
+  const submit = () => {
 
-    const form = new FormData(event.target);
+    const form = new FormData(document.forms[0]);
     form.set("email", form.get("email").toLowerCase());
     for (const key of form.keys()) {
       if (form.get(key).trim() === "") {
@@ -25,7 +25,7 @@ const Login = ({ stateSetter, state, redirect, setRedirect, children }) => {
       }
     }
 
-    axios.post(getServerURL("/login/user"), form, {}).then((res) => {
+    return axios.post(getServerURL("/login/user"), form, {}).then((res) => {
       if (res.data.Access) {
         if (redirect) {
           navigate(redirect);
@@ -52,7 +52,7 @@ const Login = ({ stateSetter, state, redirect, setRedirect, children }) => {
           onScroll={() => {
             window.scrollTo(0, 0);
           }}
-          onSubmit={submit}
+          onSubmit={(event)=>{event.preventDefault()}}
           onClick={() => {
             stateSetter(false);
           }}
@@ -101,9 +101,13 @@ const Login = ({ stateSetter, state, redirect, setRedirect, children }) => {
               onChange={textChange}
             />
             <ErrorField>{fieldError}</ErrorField>
-            <button className="btn btn-outline-success mt-3" type="submit">
-              Login
-            </button>
+            <LoadingButtton
+            className="btn btn-outline-success mt-3"
+            normalContent={"Login"}
+            loadingContent={"Loading..."}
+            onClick={()=>{
+              return submit()
+            }}/>
             <a
               href={
                 "/signup?returnurl=" + encodeURIComponent(window.location.href)

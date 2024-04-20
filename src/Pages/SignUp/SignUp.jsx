@@ -5,13 +5,12 @@ import { FormGroup } from "../../Components/FormGroup/FormGroup";
 import axios from "axios";
 import getServerURL from "../../Utils/getServerURL";
 import ErrorField from "Components/ErrorField/ErrorField";
+import { LoadingButtton } from "Components/LoadingButton/LoadingButtton";
 
 const SignUp = () => {
   const [fieldError, setFieldError] = useState("");
-  const submit = (event) => {
-    event.preventDefault();
-
-    const form = new FormData(event.target);
+  const submit = () => {
+    const form = new FormData(document.forms[0]);
     form.set("email", form.get("email").toLowerCase());
     for (let key of form.keys()) {
       if (form.get(key).trim() === "") {
@@ -28,7 +27,7 @@ const SignUp = () => {
       return;
     }
 
-    axios.post(getServerURL("/signup"), form, {}).then((res) => {
+    return axios.post(getServerURL("/signup"), form, {}).then((res) => {
       if (res.data.signedUp) {
         alert("Succefully signed up");
         let url = new URLSearchParams(window.location.search).get(
@@ -50,7 +49,7 @@ const SignUp = () => {
     <div className="container-fluid p-sm-0 p-3 back-drop bg-dark-subtle d-flex justify-content-center align-items-center ">
       <div className="col-md-4 col-sm-6 col-12 bg-light rounded-3 shadow-sm p-3">
         <h1 className="text-success d-flex justify-content-center ">Sign Up</h1>
-        <form onSubmit={submit}>
+        <form onSubmit={(event)=>{event.preventDefault()}}>
           <FormGroup
             label={"Name"}
             name={"name"}
@@ -79,9 +78,14 @@ const SignUp = () => {
             onChange={textChange}
           />
           <ErrorField>{fieldError}</ErrorField>
-          <button type="submit" className="btn btn-success w-100 mt-3">
-            Sign Up
-          </button>
+          <LoadingButtton
+          className="btn btn-success w-100 mt-3"
+          normalContent={"Sign Up"}
+          loadingContent={"Loading..."}
+          onClick={()=>{
+            return submit()
+          }}
+          />
         </form>
       </div>
     </div>
