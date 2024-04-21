@@ -8,6 +8,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import ErrorField from "Components/ErrorField/ErrorField";
 import { LoadingButtton } from "Components/LoadingButton/LoadingButtton";
+import { Separator } from "../../Components/Seperator/Separator";
 
 const Cart = () => {
   const [cartData, setCartData] = useState([]);
@@ -101,8 +102,7 @@ const Cart = () => {
             <div className="col-9">{" " + numberWithCommas(discount)}</div>
           </div>
           <hr />
-          <form
-          >
+          <form>
             <ErrorField className={"mb-2"}>{error}</ErrorField>
             <input
               type="file"
@@ -126,7 +126,7 @@ const Cart = () => {
               }
               loadingContent={"Processing..."}
               onClick={() => {
-                return bankPay()
+                return bankPay();
               }}
             />
             <div className="text-warning fs-xs mt-2">
@@ -145,7 +145,7 @@ const Cart = () => {
               method
             </div>
           </form>
-          <OptionSeparator />
+          <Separator>or</Separator>
           <LoadingButtton
             className="btn btn-outline-success col-12 mb-5 "
             onClick={() => {
@@ -250,15 +250,5 @@ const CartProduct = ({ product }) => {
     </div>
   );
 };
-
-function OptionSeparator() {
-  return (
-    <div className="d-flex align-items-center my-3">
-      <div className="flex-grow-1 border-top"></div>
-      <div className="px-2">or</div>
-      <div className="flex-grow-1 border-top"></div>
-    </div>
-  );
-}
 
 export default Cart;
