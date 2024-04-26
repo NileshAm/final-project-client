@@ -1,0 +1,17 @@
+.text-transparent {
+  color: transparent !important;
+}
+
+.error {
+  transition: all 300ms;
+}
+
+.shown {
+  height: 32px !important;
+  opacity: 1;
+}
+
+.hidden {
+  height: 0px !important;
+  opacity: 0;
+}
