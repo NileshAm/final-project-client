@@ -38,6 +38,8 @@ function App() {
             <Route path="cart" element={<Cart />} />
             <Route path="search" element={<Search />} />
             <Route path="login" element={<h1>Login</h1>} />
+            <Route path="product" element={<ProductView />} />
+
           </Route>
 
           <Route path="/checkout/:method/:state" element={<Checkout />} />
