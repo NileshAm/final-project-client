@@ -3,26 +3,26 @@ import StarRating from "Components/StarRating/StarRating";
 import getServerURL from "Utils/getServerURL";
 import axios from "axios";
 import React, { useLayoutEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
-  //eslint-disable-next-line
-  const params = new URLSearchParams(window.location.search);
+  const id = useParams().id;
 
   useLayoutEffect(() => {
     axios
-      .get(getServerURL(`/product/reviews?id=${params.get("id")}`))
+      .get(getServerURL(`/product/reviews?id=${id}`))
       .then((res) => {
         setReviews(res.data[0]);
       });
     //eslint-disable-next-line
   }, []);
   return (
-    <div className="m-2 mx-3 p-2 px-3 border rounded rounded-2 shadow">
+    <div className="m-2 mx-3 p-2 px-3 border rounded rounded-2 shadow-sm">
       {
         <>
-          <ReviewBox />
+          <ReviewBox id={id}/>
           <hr />
         </>
       }
@@ -41,16 +41,13 @@ const Reviews = () => {
   );
 };
 
-const ReviewBox = () => {
+const ReviewBox = ({id}) => {
   const itr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [stars, setStars] = useState(0);
   const [starsSet, setStarsSet] = useState(false);
   const [error, setError] = useState("");
 
-  //eslint-disable-next-line
-  const params = new URLSearchParams(window.location.search);
-
-  const addReview = () => {
+  const addReview = (id) => {
     const details = document.getElementById("Description").value;
     if (stars === 0) {
       setError("Give a score rating by clicking on the stars");
@@ -58,7 +55,7 @@ const ReviewBox = () => {
       setError("Give a description for the review");
     } else {
       const form = new FormData();
-      form.append("ID", params.get("id"));
+      form.append("ID", id);
       form.append("Rating", stars);
       form.append("Description", details);
 
@@ -116,7 +113,7 @@ const ReviewBox = () => {
       <button
         className="btn btn-outline-success mt-2 col-12 offset-0 col-md-3 offset-md-9"
         onClick={() => {
-          addReview();
+          addReview(id);
         }}
         disabled={error !== ""}
       >

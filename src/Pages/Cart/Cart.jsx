@@ -8,7 +8,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import ErrorField from "Components/ErrorField/ErrorField";
 import { LoadingButtton } from "Components/LoadingButton/LoadingButtton";
-import { Separator } from "../../Components/Seperator/Separator";
+import Separator from "../../Components/Seperator/Separator";
 
 const Cart = () => {
   const [cartData, setCartData] = useState([]);

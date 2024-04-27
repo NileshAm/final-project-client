@@ -7,7 +7,7 @@ import "./HomePage.css";
 
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Carousel from "../../Components/Carousel/Carousel";
-import { Separator } from "Components/Seperator/Separator";
+import Separator from "Components/Seperator/Separator";
 
 const HomePage = () => {
   const [data, setData] = useState([]);

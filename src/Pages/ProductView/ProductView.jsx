@@ -1,20 +1,24 @@
-import React from "react";
-import { Container, Row, Col, Button, ButtonGroup } from "react-bootstrap";
+import React, { useLayoutEffect, useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 import Ratio from "react-bootstrap/Ratio";
-import getServerURL from "../../Utils/getServerURL";
 import axios from "axios";
-import { useLayoutEffect, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
+import getServerURL from "../../Utils/getServerURL";
 import "./ProductView.css";
 import numberWithCommas from "Utils/numberWithCommas";
 import StarRating from "Components/StarRating/StarRating";
+import Reviews from "Components/Reviews/Reviews";
 import ProductCard from "Components/ProductCard/ProductCard";
+import Separator from 'Components/Seperator/Separator'
 
 function ProductView() {
-  const [data, setData] = useState({});
-  const params = new URLSearchParams(window.location.search);
+
+  const id = useParams().id
 
   const navigate = useNavigate();
+
+  const [data, setData] = useState({Rating:0});
   const [simillarProducts, setsimillarProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
 
@@ -22,18 +26,18 @@ function ProductView() {
   const increaceCount = () => setQuantity(quantity + 1);
 
   const submit = (type) => {
-    let formData = new FormData(); //formdata object
-    //append the values with key, value pair
-    formData.append("productID", params.get("id"));
+    let formData = new FormData();
+
+    formData.append("productID", id);
     formData.append("quantity", quantity);
 
     axios
       .post(getServerURL("/cart/add"), formData)
       .then((response) => {
         console.log(response);
-        if (response.data.code == 403) {
+        if (response.data.code === 403) {
           alert("Please Login");
-        } else if (response.data.code == 200) {
+        } else if (response.data.code === 200) {
           if ((type = "buy")) {
             navigate("/cart");
           } else {
@@ -50,21 +54,19 @@ function ProductView() {
     window.scrollTo(0, 0);
   }, []);
 
-  if (params.get(`id`) == null) {
-    navigate("/");
-  }
 
   useLayoutEffect(() => {
-    axios.get(getServerURL(`/product?id=${params.get("id")}`)).then((res) => {
+    axios.get(getServerURL(`/product?id=${id}`)).then((res) => {
+      console.log(res.data);
       setData(res.data[0]);
-      console.log(res.data[0].Rating);
     });
 
     axios
-      .get(getServerURL(`/product/similar?id=${params.get("id")}`))
+      .get(getServerURL(`/product/similar?id=${id}`))
       .then((res) => {
         setsimillarProducts(res.data[0]);
       });
+    //eslint-disable-next-line
   }, []);
 
   return (
@@ -88,8 +90,7 @@ function ProductView() {
             <h1>{data.Name}</h1>
             <Row>
               <h5>
-                {data.Rating} {/* To-do */}
-                {/* <StarRating Rating={data.Rating} starSize={20} className="rating-width"/> */}
+                <StarRating Rating={data.Rating} starSize={20} className="col-3"/>
               </h5>
               <Col>
                 <div
@@ -101,7 +102,6 @@ function ProductView() {
               </Col>
             </Row>
 
-            {/* Prices */}
             <Row>
               <Col xs={6} md={8}>
                 <h2 className="text-success mt-3">
@@ -115,9 +115,6 @@ function ProductView() {
                 <div className="col-6 input-group m-3">
                   <button
                     className="btn btn-outline-danger input-group-append"
-                    // onClick={() => {
-                    //   changeCartProduct(product, -1);
-                    // }}
                     disabled={quantity === 1}
                     onClick={decrememntCount}
                   >
@@ -131,9 +128,6 @@ function ProductView() {
                   </div>
                   <button
                     className="btn btn-outline-success input-group-append rounded-end "
-                    // onClick={() => {
-                    //   changeCartProduct(product, +1);
-                    // }}
                     disabled={quantity === data.Stock}
                     onClick={increaceCount}
                   >
@@ -144,9 +138,9 @@ function ProductView() {
             </Row>
 
             {/* To-do */}
-            <h3 className="text-danger ">
+            {data.Discount!==0&&<h3 className="text-danger ">
               {numberWithCommas((data.Price * data.Discount) / 100)}
-            </h3>
+            </h3>}
 
             <Row className="mt-3 d-grid gap-2 mx-auto mb-2 ">
               {/* Make into loding state button */}
@@ -168,6 +162,10 @@ function ProductView() {
       </Container>
       <div>
         <hr />
+        <Reviews />
+      </div>
+      <div>
+        <Separator className={"fs-3 fw-bold font-Helvetica"}>Similar Products</Separator>
         <div className="d-flex row justify-content-around">
           {simillarProducts.length !== 0 ? (
             simillarProducts.map((v, k) => {
