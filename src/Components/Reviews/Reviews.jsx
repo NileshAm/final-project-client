@@ -1,35 +1,52 @@
-import ErrorField from "Components/ErrorField/ErrorField";
-import StarRating from "Components/StarRating/StarRating";
-import getServerURL from "Utils/getServerURL";
 import axios from "axios";
 import React, { useLayoutEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
+
+import ErrorField from "Components/ErrorField/ErrorField";
+import Separator from "Components/Seperator/Separator";
+import StarRating from "Components/StarRating/StarRating";
+import getServerURL from "Utils/getServerURL";
 
 const Reviews = () => {
+  const [, setLogin, loggedIn, , ,] = useOutletContext();
+
   const [reviews, setReviews] = useState([]);
 
   const id = useParams().id;
 
   useLayoutEffect(() => {
-    axios
-      .get(getServerURL(`/product/reviews?id=${id}`))
-      .then((res) => {
-        setReviews(res.data[0]);
-      });
+    axios.get(getServerURL(`/product/reviews?id=${id}`)).then((res) => {
+      setReviews(res.data[0]);
+    });
     //eslint-disable-next-line
   }, []);
   return (
     <div className="m-2 mx-3 p-2 px-3 border rounded rounded-2 shadow-sm">
-      {
+      {loggedIn && (
         <>
-          <ReviewBox id={id}/>
+          <ReviewBox id={id} />
           <hr />
         </>
-      }
+      )}
       <div>
+        <Separator className="fs-2 fw-bold">Reviews</Separator>
         {reviews.length === 0 ? (
           <div className="text-secondary text-align-center">
-            No reviews yet for this product. <br /> Write a review.
+            No reviews yet for this product. <br />{" "}
+            {!loggedIn && (
+              <span>
+                <span
+                  className="cursor-pointer text-primary text-decoration-underline"
+                  onClick={() => {
+                    setLogin(true);
+                  }}
+                >
+                  Sign in
+                </span>{" "}
+                and{" "}
+              </span>
+            )}
+            write a review.
           </div>
         ) : (
           reviews.map((v, k) => {
@@ -41,31 +58,55 @@ const Reviews = () => {
   );
 };
 
-const ReviewBox = ({id}) => {
+const ReviewBox = ({ id }) => {
   const itr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   const [stars, setStars] = useState(0);
+  const [description, setDescription] = useState("");
+
   const [starsSet, setStarsSet] = useState(false);
   const [error, setError] = useState("");
 
+  const [update, setUpdate] = useState(false);
+  const [canUpdate, setCanUpdate] = useState(false);
+
+  useLayoutEffect(() => {
+    axios.get(getServerURL(`/product/reviews/user?id=${id}`)).then((res) => {
+      if (res.data) {
+        setStars(res.data.Rating);
+        setDescription(res.data.Description);
+        setCanUpdate(true);
+      }
+    });
+    //eslint-disable-next-line
+  }, []);
+
   const addReview = (id) => {
-    const details = document.getElementById("Description").value;
     if (stars === 0) {
       setError("Give a score rating by clicking on the stars");
-    } else if (details === "") {
+    } else if (description === "") {
       setError("Give a description for the review");
     } else {
       const form = new FormData();
       form.append("ID", id);
       form.append("Rating", stars);
-      form.append("Description", details);
+      form.append("Description", description);
 
-      axios.post(getServerURL("/product/reviews/add"), form).then((res) => {
-        if (res.data.code === 403) {
-          alert("Please Log in to review Products");
-        } else if (res.data.code === 200) {
-          alert("Product review added successfully");
-        }
-      });
+      let url = "add";
+      if (update) {
+        url = "update";
+      }
+      console.log(url);
+      axios
+        .post(getServerURL(`/product/reviews/change/${url}`), form)
+        .then((res) => {
+          if (res.data.code === 403) {
+            alert("Please Log in to review Products");
+          } else if (res.data.code === 200) {
+            alert(`Product review ${url.replace("e", "") + "ed"} successfully`);
+            window.location.reload();
+          }
+        });
     }
   };
 
@@ -76,19 +117,24 @@ const ReviewBox = ({id}) => {
         {itr.map((v, k) => {
           return (
             <div
-              className="bg-dangr text-transparent col cursor-pointer"
+              className={
+                "bg-dangr text-transparent col user-select-none " +
+                (update || !canUpdate ? "cursor-pointer" : "")
+              }
               onClick={(event) => {
-                setError("");
-                setStarsSet(!starsSet);
-                setStars((event.target.innerText * 1 + 1) / 2);
+                if (update || !canUpdate) {
+                  setError("");
+                  setStarsSet(!starsSet);
+                  setStars((event.target.innerText * 1 + 1) / 2);
+                }
               }}
               onMouseOver={(event) => {
-                if (!starsSet) {
+                if (!starsSet && (update || !canUpdate)) {
                   setStars((event.target.innerText * 1 + 1) / 2);
                 }
               }}
               onMouseOut={() => {
-                if (!starsSet) {
+                if (!starsSet && (update || !canUpdate)) {
                   setStars(0);
                 }
               }}
@@ -105,7 +151,10 @@ const ReviewBox = ({id}) => {
         placeholder="Write a review here ......."
         id="Description"
         name="Description"
-        onChange={() => {
+        disabled={!update && canUpdate}
+        defaultValue={description}
+        onChange={(event) => {
+          setDescription(event.target.value);
           setError("");
         }}
       />
@@ -113,11 +162,15 @@ const ReviewBox = ({id}) => {
       <button
         className="btn btn-outline-success mt-2 col-12 offset-0 col-md-3 offset-md-9"
         onClick={() => {
-          addReview(id);
+          if (canUpdate && !update) {
+            setUpdate(true);
+          } else {
+            addReview(id);
+          }
         }}
         disabled={error !== ""}
       >
-        Submit review
+        {!canUpdate || update ? "Submit review" : "Update Review"}
       </button>
     </>
   );

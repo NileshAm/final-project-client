@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import Ratio from "react-bootstrap/Ratio";
 import axios from "axios";
@@ -10,15 +10,16 @@ import numberWithCommas from "Utils/numberWithCommas";
 import StarRating from "Components/StarRating/StarRating";
 import Reviews from "Components/Reviews/Reviews";
 import ProductCard from "Components/ProductCard/ProductCard";
-import Separator from 'Components/Seperator/Separator'
+import Separator from "Components/Seperator/Separator";
 
 function ProductView() {
 
-  const id = useParams().id
+  const [, setLogin, loggedIn, , ,] = useOutletContext()
+  const id = useParams().id;
 
   const navigate = useNavigate();
 
-  const [data, setData] = useState({Rating:0});
+  const [data, setData] = useState({ Rating: 0 });
   const [simillarProducts, setsimillarProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
 
@@ -26,6 +27,10 @@ function ProductView() {
   const increaceCount = () => setQuantity(quantity + 1);
 
   const submit = (type) => {
+    if (!loggedIn){
+      setLogin(true)
+      return
+    }
     let formData = new FormData();
 
     formData.append("productID", id);
@@ -38,7 +43,7 @@ function ProductView() {
         if (response.data.code === 403) {
           alert("Please Login");
         } else if (response.data.code === 200) {
-          if ((type = "buy")) {
+          if ((type === "buy")) {
             navigate("/cart");
           } else {
             alert("Product added to the cart");
@@ -54,24 +59,21 @@ function ProductView() {
     window.scrollTo(0, 0);
   }, []);
 
-
   useLayoutEffect(() => {
     axios.get(getServerURL(`/product?id=${id}`)).then((res) => {
       console.log(res.data);
       setData(res.data[0]);
     });
 
-    axios
-      .get(getServerURL(`/product/similar?id=${id}`))
-      .then((res) => {
-        setsimillarProducts(res.data[0]);
-      });
+    axios.get(getServerURL(`/product/similar?id=${id}`)).then((res) => {
+      setsimillarProducts(res.data[0]);
+    });
     //eslint-disable-next-line
   }, []);
 
   return (
     <>
-      <Container className="mt-3 bg-light">
+      <Container className="mt-3 bg-light border rounded-3 shadow">
         <Row className="">
           <Col md={6}>
             <div style={{ borderRadius: "10px", margin: 20 }} className="phone">
@@ -80,7 +82,7 @@ function ProductView() {
                   src={data.Image}
                   alt={data.Name}
                   style={{ objectFit: "cover" }}
-                  className="rounded-3"
+                  className="rounded-4 border"
                 />
               </Ratio>
             </div>
@@ -90,12 +92,16 @@ function ProductView() {
             <h1>{data.Name}</h1>
             <Row>
               <h5>
-                <StarRating Rating={data.Rating} starSize={20} className="col-3"/>
+                <StarRating
+                  Rating={data.Rating}
+                  starSize={20}
+                  className="col-3"
+                />
               </h5>
               <Col>
                 <div
                   style={{ backgroundColor: "#e6e1e3" }}
-                  className="px-3 py-2 rounded-3"
+                  className="px-3 py-2 rounded-3 shadow-sm border"
                 >
                   <p className="description">{data.Description}</p>
                 </div>
@@ -137,10 +143,11 @@ function ProductView() {
               </Col>
             </Row>
 
-            {/* To-do */}
-            {data.Discount!==0&&<h3 className="text-danger ">
-              {numberWithCommas((data.Price * data.Discount) / 100)}
-            </h3>}
+            {data.Discount !== 0 && (
+              <h3 className="text-danger ">
+                {numberWithCommas((data.Price * data.Discount) / 100)}
+              </h3>
+            )}
 
             <Row className="mt-3 d-grid gap-2 mx-auto mb-2 ">
               {/* Make into loding state button */}
@@ -162,10 +169,12 @@ function ProductView() {
       </Container>
       <div>
         <hr />
-        <Reviews />
+        <Reviews/>
       </div>
       <div>
-        <Separator className={"fs-3 fw-bold font-Helvetica"}>Similar Products</Separator>
+        <Separator className={"fs-3 fw-bold font-Helvetica"}>
+          Similar Products
+        </Separator>
         <div className="d-flex row justify-content-around">
           {simillarProducts.length !== 0 ? (
             simillarProducts.map((v, k) => {
