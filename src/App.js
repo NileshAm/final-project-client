@@ -22,6 +22,7 @@ import AdminHome from "./Pages/AdminHome/AdminHome";
 import AdminUpdate from "./Pages/AdminUpdate/AdminUpdate";
 import AdminApprove from "Pages/AdminApprove/AdminApprove";
 import AdminPickup from "Pages/AdminPickup/AdminPickup";
+import Info from "Pages/Info/Info";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="about" element={<About />} />
             <Route path="cart" element={<Cart />} />
+            <Route path="info" element={<Info />} />
             <Route path="search" element={<Search />} />
             <Route path="login" element={<h1>Login</h1>} />
           </Route>
