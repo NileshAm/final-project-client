@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import Login from "../../Components/Login/Login";
 import axios from "axios";
 import getServerURL from "../../Utils/getServerURL";
+import Navbar from "Components/NavBar/NavBar";
 
 const HeaderFooter = () => {
   const navigate = useNavigate();
@@ -32,39 +33,11 @@ const HeaderFooter = () => {
         redirect={redirect}
         setRedirect={setRedirect}
       >
-        <nav className="d-flex justify-content-around ">
-          <a href="/">home</a>
-          <div>{name===""?"login":name}</div>
-          <button
-            onClick={() => {
-              setLogin(true);
-            }}
-          >
-            account
-          </button>
-          <button
-            onClick={() => {
-              axios.defaults.withCredentials = true;
-              axios.get(getServerURL("/logout")).then(() => {
-                window.location.reload()
-              });
-            }}
-          >
-            logout
-          </button>
-          <button
-            onClick={() => {
-              if (IsLogged) {
-                navigate("/cart");
-              } else {
-                setRedirect("/cart");
-                setLogin(true);
-              }
-            }}
-          >
-            cart
-          </button>
-        </nav>
+        <Navbar
+          IsLogged={IsLogged}
+          setLogin={setLogin}
+          setRedirect={setRedirect}
+        />
         {window.location.pathname !== "/cart" && <SearchPanel />}
         <Outlet />
         <Footer />
