@@ -86,45 +86,33 @@ const Footer = () => {
           <Col>
             <Nav className="flex-column fs-6">
               <h4>CUSTOMER CARE</h4>
-              <NavLink href="#" className="text-white p-1 ps-4">
-                My Account
-              </NavLink>
-              <NavLink href="#" className="text-white p-1 ps-4">
+              <NavLink href={'/info'} className="text-white p-1 ps-4">
                 Privacy Policy
               </NavLink>
-              <NavLink href="#" className="text-white p-1 ps-4">
+              <NavLink href={'/info'} className="text-white p-1 ps-4">
                 Returns & Refunds
               </NavLink>
-              <NavLink href="#" className="text-white p-1 ps-4">
+              <NavLink href={'/info'} className="text-white p-1 ps-4">
                 Terms & Conditions
               </NavLink>
-              <NavLink href="#" className="text-white p-1 ps-4">
+              <NavLink href={'/info'} className="text-white p-1 ps-4">
                 Online Payments
               </NavLink>
-              <NavLink href="#" className="text-white p-1 ps-4">
-                Contact Us
+              <NavLink href={'/about'} className="text-white p-1 ps-4">
+                About Us
               </NavLink>
             </Nav>
           </Col>
           <Col>
             <Nav className="flex-column fs-6">
               <h4>MOST VIEWED</h4>
-              <NavLink href="#" className="text-white  p-1 ps-4">
+              <NavLink href={'/search?term=&brands=&categories=1&rating=0&price=500000'} className="text-white  p-1 ps-4">
                 Mobile Phones
               </NavLink>
-              <NavLink href="#" className="text-white  p-1 ps-4">
+              <NavLink href={'/search?term=&brands=&categories=3&rating=0&price=500000'} className="text-white  p-1 ps-4">
                 Mobile Accessories
               </NavLink>
-              <NavLink href="#" className="text-white  p-1 ps-4">
-                Laptops
-              </NavLink>
-              <NavLink href="#" className="text-white  p-1 ps-4">
-                Speakers
-              </NavLink>
-              <NavLink href="#" className="text-white  p-1 ps-4">
-                Smart Watches
-              </NavLink>
-              <NavLink href="#" className="text-white  p-1 ps-4">
+              <NavLink href={'http://localhost:3000/search?term=&brands=&categories=2&rating=0&price=500000'} className="text-white  p-1 ps-4">
                 Tablets
               </NavLink>
             </Nav>
@@ -133,7 +121,7 @@ const Footer = () => {
       </Container>
       <div className="bg-secondary text-center pb-3">
         © 2024 Copyright:
-        <a className="text-reset fw-bold" href="D-Mobile">
+        <a className="text-reset fw-bold" href={'/info'}>
           D-Mobile
         </a>
       </div>
