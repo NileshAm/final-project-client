@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Separator({ children, className }) {
+const Separator = ({ children, className }) => {
   return (
     <div className="d-flex align-items-center my-3">
       <div className="flex-grow-1 border-top"></div>
@@ -9,3 +9,5 @@ export function Separator({ children, className }) {
     </div>
   );
 }
+
+export default Separator;

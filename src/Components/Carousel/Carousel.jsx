@@ -6,6 +6,7 @@ const Carousel = () => {
       heading: "IPhone 15 Series",
       caption: "New IPhone is now on Pre-Order",
       id: "1",
+      href: "/search?term=iPhone%2015&brands=&categories=&rating=0&price=500000",
       image:
         "https://firebasestorage.googleapis.com/v0/b/new-tech-ff9a5.appspot.com/o/NIBM-Final%2FPromo-Banners%2Fiphone-banner.jpg?alt=media&token=3db9566d-a37f-4b0e-af97-c19cacff4aeb",
     },
@@ -13,6 +14,7 @@ const Carousel = () => {
       heading: "Samsung Galaxy S24 Series",
       caption: "New S24 is now on Pre-Order",
       id: "2",
+      href: "/search?term=S24&brands=&categories=&rating=0&price=500000",
       image:
         "https://firebasestorage.googleapis.com/v0/b/new-tech-ff9a5.appspot.com/o/NIBM-Final%2FPromo-Banners%2Fsamsung-banner.jpg?alt=media&token=74d35cc7-2cac-4058-97cc-0540debb4538",
     },
@@ -33,6 +35,7 @@ const Carousel = () => {
               image={v.image}
               k={k}
               id={v.id}
+              href={v.href}
               key={k}
             />
           );
@@ -60,7 +63,7 @@ const Carousel = () => {
   );
 };
 
-const CarouselItem = ({ heading, caption, image, k, id }) => {
+const CarouselItem = ({ heading, caption, image, k,href, id }) => {
   return (
     <div
       className={"h   carousel-item " + (k === 1 ? "active" : "")}
@@ -74,7 +77,7 @@ const CarouselItem = ({ heading, caption, image, k, id }) => {
       <div className="carousel-caption text-white text-shadow">
         <h5>{heading}</h5>
         <p>{caption}</p>
-        <a href={`/promo/${id}`} className="text-white">
+        <a href={href} className="text-white">
           <i class="bi bi-box-arrow-up-right"></i> View More
         </a>
       </div>

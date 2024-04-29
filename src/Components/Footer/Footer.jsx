@@ -98,6 +98,9 @@ const Footer = () => {
               <NavLink href={'/info'} className="text-white p-1 ps-4">
                 Online Payments
               </NavLink>
+              <NavLink href={'/about'} className="text-white p-1 ps-4">
+                About Us
+              </NavLink>
             </Nav>
           </Col>
           <Col>

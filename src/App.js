@@ -23,10 +23,10 @@ import AdminUpdate from "./Pages/AdminUpdate/AdminUpdate";
 import AdminApprove from "Pages/AdminApprove/AdminApprove";
 import AdminPickup from "Pages/AdminPickup/AdminPickup";
 import Info from "Pages/Info/Info";
+import NotFound from "Pages/NotFound/NotFound";
 
 function App() {
   return (
-    // TODO : change all h1 tags with components
     <>
       <Router>
         <Routes>
@@ -39,7 +39,11 @@ function App() {
             <Route path="cart" element={<Cart />} />
             <Route path="info" element={<Info />} />
             <Route path="search" element={<Search />} />
-            <Route path="login" element={<h1>Login</h1>} />
+            <Route
+              path="product/:id"
+              element={<ProductView key={window.location.pathname} />}
+            />
+            <Route path="about" element={<About/>} />
           </Route>
 
           <Route path="/checkout/:method/:state" element={<Checkout />} />
@@ -50,10 +54,10 @@ function App() {
             <Route index element={<AdminHome />} />
             <Route path="add" element={<AddProduct />} />
             <Route path="update" element={<AdminUpdate />} />
-            <Route path="approve" element={<AdminApprove/>} />
-            <Route path="pickup" element={<AdminPickup/>} />
+            <Route path="approve" element={<AdminApprove />} />
+            <Route path="pickup" element={<AdminPickup />} />
           </Route>
-          <Route path="*" element={<h1>NotFound</h1>} />
+          <Route path="*" element={<NotFound/>} />
         </Routes>
       </Router>
     </>

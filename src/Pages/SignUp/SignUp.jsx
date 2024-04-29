@@ -26,17 +26,19 @@ const SignUp = () => {
       setFieldError("Password and Confirmed password do not match");
       return;
     }
+    if (form.get("telephone").length !== 10) {
+      setFieldError("Invalid telephone number");
+      return;
+    }
 
     return axios.post(getServerURL("/signup"), form, {}).then((res) => {
       if (res.data.signedUp) {
         alert("Succefully signed up");
-        let url = new URLSearchParams(window.location.search).get(
-          "returnurl"
-        );
-        if(!url){
-          url = "/"
+        let url = new URLSearchParams(window.location.search).get("returnurl");
+        if (!url) {
+          url = "/";
         }
-        window.location.href = url
+        window.location.href = url;
       } else {
         setFieldError(res.data.message);
       }
@@ -49,11 +51,22 @@ const SignUp = () => {
     <div className="container-fluid p-sm-0 p-3 back-drop bg-dark-subtle d-flex justify-content-center align-items-center ">
       <div className="col-md-4 col-sm-6 col-12 bg-light rounded-3 shadow-sm p-3">
         <h1 className="text-success d-flex justify-content-center ">Sign Up</h1>
-        <form onSubmit={(event)=>{event.preventDefault()}}>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
           <FormGroup
             label={"Name"}
             name={"name"}
             className={"mt-3"}
+            onChange={textChange}
+          />
+          <FormGroup
+            label={"Telephone"}
+            name={"telephone"}
+            className={"mt-3"}
+            type={"number"}
             onChange={textChange}
           />
           <FormGroup
@@ -79,12 +92,12 @@ const SignUp = () => {
           />
           <ErrorField>{fieldError}</ErrorField>
           <LoadingButtton
-          className="btn btn-success w-100 mt-3"
-          normalContent={"Sign Up"}
-          loadingContent={"Loading..."}
-          onClick={()=>{
-            return submit()
-          }}
+            className="btn btn-success w-100 mt-3"
+            normalContent={"Sign Up"}
+            loadingContent={"Loading..."}
+            onClick={() => {
+              return submit();
+            }}
           />
         </form>
       </div>

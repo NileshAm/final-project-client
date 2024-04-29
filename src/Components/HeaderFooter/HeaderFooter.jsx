@@ -12,7 +12,7 @@ const HeaderFooter = () => {
 
   const [login, setLogin] = useState(false);
   const [redirect, setRedirect] = useState(null);
-  const [name, setName] = useState("");
+  const [user, setUser] = useState({});
   const [IsLogged, setIsLogged] = useState(false);
 
   axios.defaults.withCredentials = true;
@@ -20,7 +20,7 @@ const HeaderFooter = () => {
     axios.get(getServerURL("/login")).then((res) => {
       setIsLogged(res.data.loggedIn);
       if (res.data.loggedIn) {
-        setName(res.data.user.Name);
+        setUser(res.data.user);
       }
     });
   }, [login]);
@@ -39,7 +39,9 @@ const HeaderFooter = () => {
           setRedirect={setRedirect}
         />
         {window.location.pathname !== "/cart" && <SearchPanel />}
-        <Outlet />
+        <Outlet
+          context={[login, setLogin, IsLogged, setIsLogged, user, setUser]}
+        />
         <Footer />
       </Login>
     </>
