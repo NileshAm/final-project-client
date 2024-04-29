@@ -6,6 +6,7 @@ import ErrorField from "Components/ErrorField/ErrorField";
 import Separator from "Components/Seperator/Separator";
 import StarRating from "Components/StarRating/StarRating";
 import getServerURL from "Utils/getServerURL";
+import { LoadingButtton } from "Components/LoadingButton/LoadingButtton";
 
 const Reviews = () => {
   const [, setLogin, loggedIn, , ,] = useOutletContext();
@@ -97,7 +98,7 @@ const ReviewBox = ({ id }) => {
         url = "update";
       }
       console.log(url);
-      axios
+      return axios
         .post(getServerURL(`/product/reviews/change/${url}`), form)
         .then((res) => {
           if (res.data.code === 403) {
@@ -159,19 +160,19 @@ const ReviewBox = ({ id }) => {
         }}
       />
       <ErrorField>{error}</ErrorField>
-      <button
+      <LoadingButtton
         className="btn btn-outline-success mt-2 col-12 offset-0 col-md-3 offset-md-9"
         onClick={() => {
           if (canUpdate && !update) {
-            setUpdate(true);
+            return setUpdate(true);
           } else {
-            addReview(id);
+            return addReview(id);
           }
         }}
         disabled={error !== ""}
-      >
-        {!canUpdate || update ? "Submit review" : "Update Review"}
-      </button>
+        normalContent={!canUpdate || update ? "Submit review" : "Update Review"}
+        loadingContent={"Proccessing..."}
+      />
     </>
   );
 };

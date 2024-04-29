@@ -11,6 +11,7 @@ import StarRating from "Components/StarRating/StarRating";
 import Reviews from "Components/Reviews/Reviews";
 import ProductCard from "Components/ProductCard/ProductCard";
 import Separator from "Components/Seperator/Separator";
+import { LoadingButtton } from "Components/LoadingButton/LoadingButtton";
 
 function ProductView() {
 
@@ -36,7 +37,7 @@ function ProductView() {
     formData.append("productID", id);
     formData.append("quantity", quantity);
 
-    axios
+    return axios
       .post(getServerURL("/cart/add"), formData)
       .then((response) => {
         console.log(response);
@@ -150,26 +151,29 @@ function ProductView() {
             )}
 
             <Row className="mt-3 d-grid gap-2 mx-auto mb-2 ">
-              {/* Make into loding state button */}
-              <button
+              <LoadingButtton
                 className="btn btn-outline-success"
-                onClick={() => submit("buy")}
-              >
-                Buy
-              </button>
-              <button
+                onClick={() => {
+                  return submit("buy");
+                }}
+                normalContent={"Buy"}
+                loadingContent={"Proccessing..."}
+              />
+              <LoadingButtton
                 className="btn btn-outline-success"
-                onClick={() => submit("cart")}
-              >
-                Add to cart
-              </button>
+                onClick={() => {
+                  return submit("cart");
+                }}
+                normalContent={"Add to cart"}
+                loadingContent={"Proccessing..."}
+              />
             </Row>
           </Col>
         </Row>
       </Container>
       <div>
         <hr />
-        <Reviews/>
+        <Reviews />
       </div>
       <div>
         <Separator className={"fs-3 fw-bold font-Helvetica"}>
