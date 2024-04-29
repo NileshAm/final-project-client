@@ -39,6 +39,10 @@ function App() {
             <Route path="cart" element={<Cart />} />
             <Route path="info" element={<Info />} />
             <Route path="search" element={<Search />} />
+            <Route
+              path="product/:id"
+              element={<ProductView key={window.location.pathname} />}
+            />
             <Route path="about" element={<About/>} />
           </Route>
 
@@ -50,8 +54,8 @@ function App() {
             <Route index element={<AdminHome />} />
             <Route path="add" element={<AddProduct />} />
             <Route path="update" element={<AdminUpdate />} />
-            <Route path="approve" element={<AdminApprove/>} />
-            <Route path="pickup" element={<AdminPickup/>} />
+            <Route path="approve" element={<AdminApprove />} />
+            <Route path="pickup" element={<AdminPickup />} />
           </Route>
           <Route path="*" element={<NotFound/>} />
         </Routes>

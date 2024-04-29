@@ -26,7 +26,10 @@ const ProductCard = ({ data, admin }) => {
       className={cls()}
       onClick={() => {
         if (!admin) {
-          navigate(`/product?id=${ID}`);
+          navigate(`/product/${ID}`);
+          if(window.location.pathname.split("/")[1] === "product"){
+            window.location.reload()
+          }
         }
       }}
     >

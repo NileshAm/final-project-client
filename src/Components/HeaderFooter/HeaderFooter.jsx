@@ -11,7 +11,7 @@ const HeaderFooter = () => {
 
   const [login, setLogin] = useState(false);
   const [redirect, setRedirect] = useState(null);
-  const [name, setName] = useState("");
+  const [user, setUser] = useState({});
   const [IsLogged, setIsLogged] = useState(false);
 
   axios.defaults.withCredentials = true;
@@ -19,7 +19,7 @@ const HeaderFooter = () => {
     axios.get(getServerURL("/login")).then((res) => {
       setIsLogged(res.data.loggedIn);
       if (res.data.loggedIn) {
-        setName(res.data.user.Name);
+        setUser(res.data.user);
       }
     });
   }, [login]);
@@ -34,7 +34,7 @@ const HeaderFooter = () => {
       >
         <nav className="d-flex justify-content-around ">
           <a href="/">home</a>
-          <div>{name===""?"login":name}</div>
+          <div>{!user.Name ? "login" : user.Name}</div>
           <button
             onClick={() => {
               setLogin(true);
@@ -46,7 +46,7 @@ const HeaderFooter = () => {
             onClick={() => {
               axios.defaults.withCredentials = true;
               axios.get(getServerURL("/logout")).then(() => {
-                window.location.reload()
+                window.location.reload();
               });
             }}
           >
@@ -66,7 +66,9 @@ const HeaderFooter = () => {
           </button>
         </nav>
         {window.location.pathname !== "/cart" && <SearchPanel />}
-        <Outlet />
+        <Outlet
+          context={[login, setLogin, IsLogged, setIsLogged, user, setUser]}
+        />
         <Footer />
       </Login>
     </>
