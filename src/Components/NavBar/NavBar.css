@@ -83,6 +83,13 @@
   color: var(--light);
 }
 
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: var(--light);
+  background-color: var(--dark);
+  border-radius: var(--radius);
+}
+
 
 @media screen and (max-width: 1000px) {
   .navbar-nav .nav-link.show {
