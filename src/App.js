@@ -23,10 +23,10 @@ import AdminUpdate from "./Pages/AdminUpdate/AdminUpdate";
 import AdminApprove from "Pages/AdminApprove/AdminApprove";
 import AdminPickup from "Pages/AdminPickup/AdminPickup";
 import Info from "Pages/Info/Info";
+import NotFound from "Pages/NotFound/NotFound";
 
 function App() {
   return (
-    // TODO : change all h1 tags with components
     <>
       <Router>
         <Routes>
@@ -53,7 +53,7 @@ function App() {
             <Route path="approve" element={<AdminApprove/>} />
             <Route path="pickup" element={<AdminPickup/>} />
           </Route>
-          <Route path="*" element={<h1>NotFound</h1>} />
+          <Route path="*" element={<NotFound/>} />
         </Routes>
       </Router>
     </>
