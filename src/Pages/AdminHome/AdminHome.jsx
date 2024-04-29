@@ -24,7 +24,7 @@ const AdminHome = () => {
       <div className="row d-flex justify-content-around ">
         <button
           type="button"
-          className="col col-11 col-md-3 m-3 btn btn-outline-danger fs-5"
+          className="col col-11 col-md-2 m-1 btn btn-outline-danger fs-6 mt-3"
           onClick={() => {
             navigate("/admin/approve");
           }}
@@ -40,7 +40,7 @@ const AdminHome = () => {
         </button>
         <button
           type="button"
-          className="col col-11 col-md-3 m-3 btn btn-outline-warning fs-5"
+          className="col col-11 col-md-2 m-1 btn btn-outline-warning fs-6 mt-3"
           onClick={() => {
             navigate("/admin/pickup");
           }}
@@ -56,13 +56,22 @@ const AdminHome = () => {
         </button>
         <button
           type="button"
-          className="col col-11 col-md-3 m-3 btn btn-outline-success fs-5"
+          className="col col-11 col-md-2 m-1 btn btn-outline-success fs-6 mt-3"
           onClick={() => {
             navigate("/admin/add");
           }}
         >
           <i className="bi bi-upload m-2"></i>
           Add New Product
+        </button>
+        <button
+          type="button"
+          className="col col-11 col-md-2 m-1 btn btn-outline-success fs-6 mt-3"
+          onClick={() => {
+            navigate("/admin/add/others");
+          }}
+        >
+          <i className="bi bi-upload m-1"></i>Add brand/category
         </button>
       </div>
       <hr />

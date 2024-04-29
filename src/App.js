@@ -24,6 +24,7 @@ import AdminApprove from "Pages/AdminApprove/AdminApprove";
 import AdminPickup from "Pages/AdminPickup/AdminPickup";
 import Info from "Pages/Info/Info";
 import NotFound from "Pages/NotFound/NotFound";
+import AdminBrandCategory from "./Pages/AdminBrandCategory/AdminBrandCategory";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
             <Route path="update" element={<AdminUpdate />} />
             <Route path="approve" element={<AdminApprove />} />
             <Route path="pickup" element={<AdminPickup />} />
+            <Route path="add/others" element={<AdminBrandCategory/>} />
           </Route>
           <Route path="*" element={<NotFound/>} />
         </Routes>
