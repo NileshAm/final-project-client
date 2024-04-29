@@ -92,6 +92,10 @@
 
 
 @media screen and (max-width: 1000px) {
+  .px-2_5 {
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
   .navbar-nav .nav-link.show {
     color: var(--light);
   }

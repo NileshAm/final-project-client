@@ -37,7 +37,7 @@ const Footer = () => {
           <Col lg="3" md="3" className="my-2">
             <img
               src={
-                "https://1000logos.net/wp-content/uploads/2021/05/Sony-logo.png"
+                "https://www.freepnglogos.com/uploads/black-samsung-logo-png-21.png"
               }
               className="img-fluid "
               alt=""
@@ -62,7 +62,7 @@ const Footer = () => {
               <p>
                 <a
                   className="bi bi-envelope-at-fill text-white"
-                  href="mailto: name@email.com"
+                  href="mailto: jmdase@gmail.com"
                 >
                   {" "}
                   jmdase@gmail.com
@@ -86,19 +86,19 @@ const Footer = () => {
           <Col>
             <Nav className="flex-column fs-6">
               <h4>CUSTOMER CARE</h4>
-              <NavLink href={'/info'} className="text-white p-1 ps-4">
+              <NavLink href={"/info"} className="text-white p-1 ps-4">
                 Privacy Policy
               </NavLink>
-              <NavLink href={'/info'} className="text-white p-1 ps-4">
+              <NavLink href={"/info"} className="text-white p-1 ps-4">
                 Returns & Refunds
               </NavLink>
-              <NavLink href={'/info'} className="text-white p-1 ps-4">
+              <NavLink href={"/info"} className="text-white p-1 ps-4">
                 Terms & Conditions
               </NavLink>
-              <NavLink href={'/info'} className="text-white p-1 ps-4">
+              <NavLink href={"/info"} className="text-white p-1 ps-4">
                 Online Payments
               </NavLink>
-              <NavLink href={'/about'} className="text-white p-1 ps-4">
+              <NavLink href={"/about"} className="text-white p-1 ps-4">
                 About Us
               </NavLink>
             </Nav>
@@ -106,13 +106,28 @@ const Footer = () => {
           <Col>
             <Nav className="flex-column fs-6">
               <h4>MOST VIEWED</h4>
-              <NavLink href={'/search?term=&brands=&categories=1&rating=0&price=500000'} className="text-white  p-1 ps-4">
+              <NavLink
+                href={
+                  "/search?term=&brands=&categories=1&rating=0&price=500000"
+                }
+                className="text-white  p-1 ps-4"
+              >
                 Mobile Phones
               </NavLink>
-              <NavLink href={'/search?term=&brands=&categories=3&rating=0&price=500000'} className="text-white  p-1 ps-4">
+              <NavLink
+                href={
+                  "/search?term=&brands=&categories=3&rating=0&price=500000"
+                }
+                className="text-white  p-1 ps-4"
+              >
                 Mobile Accessories
               </NavLink>
-              <NavLink href={'http://localhost:3000/search?term=&brands=&categories=2&rating=0&price=500000'} className="text-white  p-1 ps-4">
+              <NavLink
+                href={
+                  "http://localhost:3000/search?term=&brands=&categories=2&rating=0&price=500000"
+                }
+                className="text-white  p-1 ps-4"
+              >
                 Tablets
               </NavLink>
             </Nav>
@@ -121,7 +136,7 @@ const Footer = () => {
       </Container>
       <div className="bg-secondary text-center pb-3">
         © 2024 Copyright:
-        <a className="text-reset fw-bold" href={'/info'}>
+        <a className="text-reset fw-bold" href={"/info"}>
           D-Mobile
         </a>
       </div>

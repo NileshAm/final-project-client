@@ -41,12 +41,12 @@ const Navbar = ({ IsLogged, setLogin, setRedirect, user }) => {
               </li>
               <li className="nav-item dropdown">
                 <button
-                  className="nav-link dropdown-toggle col-12"
+                  className="nav-link dropdown-toggl col-12"
                   id="navbarDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Mobile Devices
+                  Mobile Devices <i className="bi bi-caret-down-fill fs-6"></i>
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
@@ -77,12 +77,12 @@ const Navbar = ({ IsLogged, setLogin, setRedirect, user }) => {
               </li>
               <li className="nav-item dropdown">
                 <button
-                  className="nav-link dropdown-toggle col-12"
+                  className="nav-link col-12"
                   id="navbarDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Brands
+                  Brands <i className="bi bi-caret-down-fill fs-6"></i>
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   {brands.length === 0 ? (
