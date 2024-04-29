@@ -36,13 +36,13 @@ const Navbar = ({ IsLogged, setLogin, setRedirect }) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100 d-flex justify-content-around">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
+                <a className="nav-link " aria-current="page" href="/">
                   Home
                 </a>
               </li>
               <li className="nav-item dropdown">
                 <button
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle col-12"
                   id="navbarDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -78,7 +78,7 @@ const Navbar = ({ IsLogged, setLogin, setRedirect }) => {
               </li>
               <li className="nav-item dropdown">
                 <button
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle col-12"
                   id="navbarDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -116,8 +116,7 @@ const Navbar = ({ IsLogged, setLogin, setRedirect }) => {
               <div className="d-flex py-1 col-md-2 col-12 d-flex justify-content-around">
                 <button
                   className={
-                    "bi bi-cart3 btn btn-outline-dark p-1 rounded-circle border-1 fw-bold " +
-                    (IsLogged ? "px-2" : "px-2_5")
+                    "bi bi-cart3 btn btn-dark p-1 rounded-circle border-1 fw-bold px-2_5"
                   }
                   onClick={() => {
                     if (IsLogged) {
@@ -131,19 +130,29 @@ const Navbar = ({ IsLogged, setLogin, setRedirect }) => {
                 {IsLogged ? (
                   <button
                     type="button"
-                    className="bi bi-person btn btn-outline-dark p-1 px-2 rounded-circle border-1 fw-bold"
+                    className="bi bi-person btn btn-dark p-1 px-2 rounded-circle border-1 fw-bold px-2_5"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                   ></button>
                 ) : (
-                  <button
-                    className="btn btn-outline-primary p-1"
-                    onClick={() => {
-                      setLogin(true);
-                    }}
-                  >
-                    Login
-                  </button>
+                  <>
+                    <button
+                      className="btn btn-primary p-1"
+                      onClick={() => {
+                        setLogin(true);
+                      }}
+                    >
+                      Login
+                    </button>
+                    <button
+                      className="btn btn-primary p-1"
+                      onClick={() => {
+                        navigate("/signup")
+                      }}
+                    >
+                      Sign Up
+                    </button>
+                  </>
                 )}
               </div>
             </ul>

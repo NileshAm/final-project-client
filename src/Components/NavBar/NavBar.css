@@ -1,3 +1,10 @@
+:root {
+  --primary-blue: #1888ff;
+  --dark: #1c1c1c;
+  --light: #cecccc;
+  --radius: 11px;
+}
+
 .px-2_5 {
   padding-left: 0.7rem !important;
   padding-right: 0.7rem !important;
@@ -32,8 +39,18 @@
   margin-right: 2rem;
 }
 
-.nav-link{
+.nav-link {
   font-size: larger;
+}
+
+.nav-item.active {
+  font-weight: normal;
+  color: var(--light);
+}
+
+.nav-item.active:hover {
+  font-weight: normal;
+  color: var(--light) !important;
 }
 
 .nav-item {
@@ -41,25 +58,55 @@
   color: #fff;
   text-decoration: none;
   padding: 0.1rem 1rem;
+
 }
 
-.nav-item:hover {
-  background-color: #1888ff;
-  border-radius: 20px;
-  transition: all 0.2s ease-out;
+.nav-link {
+  border-radius: 5px;
 }
 
-.nav-item::after {
-  background-color: #1888ff;
-  border-radius: 20px;
+.nav-link:hover {
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: var(--radius);
+  transition: all 0.1s ease-out;
+}
+
+.nav-link::after {
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: var(--radius);
 }
 
 .dropdown-item:hover {
-  background-color: #1888ff;
+  background-color: var(--dark);
+  color: var(--light);
 }
 
 
 @media screen and (max-width: 1000px) {
+  .navbar-nav .nav-link.show {
+    color: var(--light);
+  }
+
+  .nav-link:hover {
+    background-color: var(--dark);
+    color: var(--light);
+    border-radius: var(--radius);
+    transition: all 0.1s ease-out;
+  }
+
+  .nav-link::after {
+    background-color: var(--dark);
+    color: var(--light);
+    border-radius: var(--radius);
+  }
+
+  .nav-link:active {
+    background-color: var(--dark);
+    color: var(--light);
+    border-radius: var(--radius);
+  }
 
   .navbar-nav {
     display: inherit;
@@ -85,19 +132,8 @@
     display: table;
   }
 
-  .nav-item:hover {
-    background-color: #1888ff;
-    border-radius: 30px;
-    padding: 0.29rem;
-  }
-
-  .dropdown-item {
-    background-color: rgb(177, 174, 174);
-    font-weight: bold;
-  }
-
   .dropdown-item:hover {
-    background-color: #1888ff;
+    background-color: var(--primary-blue);
     font-weight: bold;
   }
 
