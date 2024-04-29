@@ -71,7 +71,6 @@ const Login = ({ stateSetter, state, redirect, setRedirect, children }) => {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={30}
-                // height={10}
                 viewBox="0 -0.5 25 25"
                 fill="none"
                 className="d-flex align-self-start cursor-pointer"

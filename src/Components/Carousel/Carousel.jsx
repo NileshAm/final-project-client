@@ -63,7 +63,7 @@ const Carousel = () => {
   );
 };
 
-const CarouselItem = ({ heading, caption, image, k,href, id }) => {
+const CarouselItem = ({ heading, caption, image, k, href, id }) => {
   return (
     <div
       className={"h   carousel-item " + (k === 1 ? "active" : "")}
@@ -78,7 +78,7 @@ const CarouselItem = ({ heading, caption, image, k,href, id }) => {
         <h5>{heading}</h5>
         <p>{caption}</p>
         <a href={href} className="text-white">
-          <i class="bi bi-box-arrow-up-right"></i> View More
+          <i className="bi bi-box-arrow-up-right"></i> View More
         </a>
       </div>
     </div>

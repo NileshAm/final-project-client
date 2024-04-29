@@ -8,7 +8,6 @@ import getServerURL from "../../Utils/getServerURL";
 import Navbar from "Components/NavBar/NavBar";
 
 const HeaderFooter = () => {
-  const navigate = useNavigate();
 
   const [login, setLogin] = useState(false);
   const [redirect, setRedirect] = useState(null);
@@ -37,6 +36,7 @@ const HeaderFooter = () => {
           IsLogged={IsLogged}
           setLogin={setLogin}
           setRedirect={setRedirect}
+          user={user}
         />
         {window.location.pathname !== "/cart" && <SearchPanel />}
         <Outlet

@@ -34,7 +34,6 @@ const AddProduct = () => {
       if (form.get(key.toLowerCase()) === null) {
         form.append(key.toLowerCase(), data[key]);
       }
-      console.log(form.get(key.toLowerCase()));
     });
     
     for (const key of form.keys()) {

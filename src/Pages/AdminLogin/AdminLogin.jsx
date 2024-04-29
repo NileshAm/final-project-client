@@ -16,7 +16,6 @@ const Login = () => {
 
   useLayoutEffect(() => {
     axios.get(getServerURL("/login")).then((res) => {
-      console.log(res.data);
       if (res.data.loggedIn && res.data.user.isAdmin) {
         navigate("/admin");
       }

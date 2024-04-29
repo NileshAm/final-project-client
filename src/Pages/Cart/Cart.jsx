@@ -20,7 +20,6 @@ const Cart = () => {
 
   axios.defaults.withCredentials = true;
   axios.get(getServerURL("/login")).then((res) => {
-    console.log(res.data);
     if (!res.data.loggedIn) {
       navigate("/");
     }
@@ -58,7 +57,6 @@ const Cart = () => {
       .post(getServerURL("/checkout/online"), form, {})
       .then((res) => {
         if (res.data.completed) {
-          console.log(res.data.url);
           window.location = res.data.url;
         }
       });
@@ -171,13 +169,11 @@ const CartProduct = ({ product }) => {
     let newQuantity = product.Quantity + amount;
     if (newQuantity !== 0 && newQuantity <= product.Stock) {
       const form = new FormData();
-      console.log(product.CartID);
       form.append("cartID", product.CartID);
       form.append("productID", product.ProductID);
       form.append("quantity", newQuantity);
       form.append("delete", deleted);
       axios.post(getServerURL("/cart/edit"), form, {}).then((res) => {
-        console.log(res);
         if (res.data.updateStatus) {
           window.location.reload();
         }

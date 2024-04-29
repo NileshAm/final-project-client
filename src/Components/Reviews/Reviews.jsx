@@ -97,7 +97,6 @@ const ReviewBox = ({ id }) => {
       if (update) {
         url = "update";
       }
-      console.log(url);
       return axios
         .post(getServerURL(`/product/reviews/change/${url}`), form)
         .then((res) => {

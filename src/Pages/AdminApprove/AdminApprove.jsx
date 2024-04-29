@@ -7,7 +7,6 @@ const AdminApprove = () => {
   const [data, setData] = useState([]);
   useLayoutEffect(() => {
     axios.get(getServerURL("/admin/approvals/items")).then((res) => {
-      console.log(res.data);
       if (res.data) {
         setData(res.data);
       }
@@ -83,7 +82,6 @@ const AccordionItem = ({ data }) => {
             </div>
             <div className="border p-2 rounded">
               {data.Items.map((v, k) => {
-                console.log(k);
                 return (
                   <>
                     <ProductItem key={k} data={v} />

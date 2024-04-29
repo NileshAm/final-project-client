@@ -10,21 +10,12 @@ const Checkout = () => {
   let param = useParams();
 
   const isSuccess = param.state === "success";
-  axios.defaults.withCredentials = true
-  if (param.method === "online" ) {
+  axios.defaults.withCredentials = true;
+  if (param.method === "online") {
     if (param.state === "success") {
-
-      axios
-        .post(getServerURL("/checkout/online/verify"), {})
-        .then((res) => {
-          console.log(res);
-        });
+      axios.post(getServerURL("/checkout/online/verify"), {});
     } else if (param.state === "cancel") {
-      axios
-        .post(getServerURL("/checkout/online/cancel"), {})
-        .then((res) => {
-          console.log(res);
-        });
+      axios.post(getServerURL("/checkout/online/cancel"), {});
     }
   }
   return (

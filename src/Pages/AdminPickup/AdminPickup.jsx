@@ -7,7 +7,6 @@ const AdminPickup = () => {
   const [data, setData] = useState([]);
   useLayoutEffect(() => {
     axios.get(getServerURL("/admin/pickup/items")).then((res) => {
-      console.log(res.data);
       if (res.data) {
         setData(res.data);
       }
@@ -75,7 +74,6 @@ const AccordionItem = ({ data }) => {
             </div>
             <div className="border p-2 rounded col-12 col-md-6">
               {data.Items.map((v, k) => {
-                console.log(k);
                 return (
                   <>
                     <ProductItem key={k} data={v} />

@@ -4,7 +4,6 @@ import "./ErrorField.css";
 
 const ErrorField = ({ children, className }) => {
   let isError = children === "" || children === null;
-  console.log(isError);
   return (
     <div
       className={

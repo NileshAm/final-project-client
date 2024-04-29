@@ -121,7 +121,6 @@ const AdminView = ({ data }) => {
           const form = new FormData();
           form.append("id", ID);
 
-          console.log(form);
           axios
             .post(getServerURL("/admin/product/statechange"), form, {})
             .then((res) => {

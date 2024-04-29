@@ -6,13 +6,12 @@ import logo from "logo.svg";
 import getServerURL from "Utils/getServerURL";
 import "./NavBar.css";
 
-const Navbar = ({ IsLogged, setLogin, setRedirect }) => {
+const Navbar = ({ IsLogged, setLogin, setRedirect, user }) => {
   const navigate = useNavigate();
   const [brands, setBrands] = useState([]);
   useLayoutEffect(() => {
     axios.get(getServerURL("/brands")).then((res) => {
       setBrands(res.data);
-      console.log(res.data);
     });
   }, []);
   return (
@@ -147,7 +146,7 @@ const Navbar = ({ IsLogged, setLogin, setRedirect }) => {
                     <button
                       className="btn btn-primary p-1"
                       onClick={() => {
-                        navigate("/signup")
+                        navigate("/signup");
                       }}
                     >
                       Sign Up
@@ -159,18 +158,18 @@ const Navbar = ({ IsLogged, setLogin, setRedirect }) => {
           </div>
         </div>
       </nav>
-      <Modal />
+      <Modal user={user} />
     </>
   );
 };
 
-const Modal = () => {
+const Modal = ({ user }) => {
   return (
     <>
       <div
         className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -189,11 +188,12 @@ const Modal = () => {
             </div>
             <div className="modal-body row">
               <div className="col-2">
-                <i class="bi bi-person fs-1 border border-2 px-2 rounded-circle border-dark"></i>
+                <i className="bi bi-person fs-1 border border-2 px-2 rounded-circle border-dark"></i>
               </div>
               <div className="col-10">
-                <div>Email : </div>
-                <div>Name : </div>
+                <div>Email : {user.Email}</div>
+                <div>Name : {user.Name}</div>
+                <div>Contact : {user.Contact}</div>
               </div>
             </div>
             <div className="modal-footer">

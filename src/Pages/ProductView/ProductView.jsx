@@ -40,7 +40,6 @@ function ProductView() {
     return axios
       .post(getServerURL("/cart/add"), formData)
       .then((response) => {
-        console.log(response);
         if (response.data.code === 403) {
           alert("Please Login");
         } else if (response.data.code === 200) {
@@ -52,7 +51,7 @@ function ProductView() {
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -62,7 +61,6 @@ function ProductView() {
 
   useLayoutEffect(() => {
     axios.get(getServerURL(`/product?id=${id}`)).then((res) => {
-      console.log(res.data);
       setData(res.data[0]);
     });
 
