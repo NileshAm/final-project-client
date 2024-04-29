@@ -80,7 +80,7 @@ const Cart = () => {
 
   return (
     <>
-      <div className="row">
+      <div className="row paddingtop">
         <div className="col col-md-8 col-12">
           {cartData.length === 0 ? (
             <div className="d-flex col-12 justify-content-center fs-3 text-body-tertiary ">

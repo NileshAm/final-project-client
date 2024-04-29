@@ -9,6 +9,7 @@
 .fs-8 {
   font-size: small;
 }
+
 .fs-xs {
   font-size: x-small;
 }
@@ -31,4 +32,8 @@
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.paddingtop {
+  padding-top: 70px !important;
 }

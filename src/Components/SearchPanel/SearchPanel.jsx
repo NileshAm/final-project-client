@@ -77,7 +77,7 @@ const SearchPanel = () => {
 
   return (
     <form
-      className="bg-light p-2"
+      className="bg-light p-2 paddingtop"
       onSubmit={(event) => {
         submit(event);
       }}
